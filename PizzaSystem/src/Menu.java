@@ -1,31 +1,60 @@
-import javax.swing.*;
-import java.awt.*;
+import java.util.ArrayList;
 /**
- * Created by yabsubu12 on 10/5/14.
+ * Created by Nik on 10/2/14.
  */
-public class Menu extends JApplet  {
+public class Menu { //Singleton class, only 1 menu can exist.
 
-    private static final int APP_WIDTH = 600;
-    private static final int APP_HEIGHT = 600;
-    private static final String COMPANY_NAME = "THE PIZZA HOUSE";
+    ArrayList<MenuItem> menuItems;
+    MenuItem currentSpecial;
+    private static Menu aMenu;
 
-
-    public void init(){
-        setSize(APP_WIDTH, APP_HEIGHT);
-        setLayout(new BorderLayout());
-        addTop();
-
+    private Menu() {
+        menuItems = new ArrayList<MenuItem>();
+        currentSpecial = null;
     }
 
-    public void addTop(){
-        JPanel topPane = new JPanel(new FlowLayout());
+    public static Menu getInstance() {
+        if (aMenu == null) {
+            aMenu = new Menu();
+        }
 
-        JLabel compName = new JLabel(COMPANY_NAME);
-
-        //Adding to topPane
-        topPane.add(compName);
-
-        this.add(topPane, BorderLayout.NORTH);
+        return aMenu;
     }
 
+    public void addItem(String name, double price, boolean isSpecial) {
+        MenuItem anItem = new MenuItem(name, price, isSpecial);
+    }
+
+    public void addItem(MenuItem anItem) {
+        menuItems.add(anItem);
+    }
+
+    public void modifyItem(String name, double newPrice) {
+        for(MenuItem anItem: menuItems) {
+            if(anItem.getName().equals(name)) {
+                anItem.setPrice(newPrice);
+            }
+        }
+    }
+
+    public void removeItem(String name) {
+        for(MenuItem anItem: menuItems) {
+            if(anItem.getName().equals(name)) {
+                menuItems.remove(anItem);
+            }
+        }
+    }
+
+    public void setSpecial(String name, boolean isSpecial) {
+        for(MenuItem anItem: menuItems) {
+            if(anItem.getName().equals(name)) {
+                anItem.setSpecial(isSpecial);
+                if(isSpecial) {             //Making an item the special
+                    currentSpecial = anItem;
+                } else {                    //Removing an item from being the special
+                    currentSpecial = null;
+                }
+            }
+        }
+    }
 }
