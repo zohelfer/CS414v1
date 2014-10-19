@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Zacc.menuUI;
+package UI;
 
 import javax.swing.JTextArea;
 import javax.swing.JTextField;

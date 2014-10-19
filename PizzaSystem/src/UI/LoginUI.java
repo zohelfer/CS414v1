@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Zacc.loginUI;
+package UI;
 
 /**
  *
@@ -82,6 +82,8 @@ public class LoginUI extends javax.swing.JFrame {
 
     private void buttonCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCusActionPerformed
         // TODO add your handling code here:
+        MainMenu menu = new MainMenu();
+        menu.setVisible(true);
     }//GEN-LAST:event_buttonCusActionPerformed
 
     private void buttonEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEmpActionPerformed
