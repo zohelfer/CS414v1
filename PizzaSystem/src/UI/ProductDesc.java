@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Zacc.menuUI;
+package UI;
 /**
  *
  * @author zacc
@@ -13,8 +13,11 @@ public class ProductDesc extends javax.swing.JFrame {
     /**
      * Creates new form ProductDesc
      */
-    public ProductDesc() {
+    private MainMenu menu;
+    
+    public ProductDesc(MainMenu mm) {
         initComponents();
+        this.menu = mm;
     }
 
     /**
@@ -25,7 +28,7 @@ public class ProductDesc extends javax.swing.JFrame {
    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        //bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
+     //   bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         picture = new javax.swing.JLabel();
         pizzaNameLabel = new javax.swing.JLabel();
@@ -42,8 +45,8 @@ public class ProductDesc extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-       // org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, picture, org.jdesktop.beansbinding.ELProperty.create("${icon}"), picture, org.jdesktop.beansbinding.BeanProperty.create("icon"));
-       // bindingGroup.addBinding(binding);
+      //  org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, picture, org.jdesktop.beansbinding.ELProperty.create("${icon}"), picture, org.jdesktop.beansbinding.BeanProperty.create("icon"));
+      //  bindingGroup.addBinding(binding);
 
         pizzaNameLabel.setText("PIZZA NAME");
 
@@ -142,14 +145,21 @@ public class ProductDesc extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-      //  bindingGroup.bind();
+     //   bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void orderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderButtonActionPerformed
         // TODO add your handling code here:
-        // Add to order
+        String item = "";
+        item += pizzaNameLabel.getText();
+        item += "   ";
+        item += qtyComboBox.getSelectedItem();
+        item += "   ";
+        item += priceLabel.getText();
+        menu.addOrder(item);
+        menu.updatePrice(Double.parseDouble(priceLabel.getText()), true);
         this.setVisible(false);
     }//GEN-LAST:event_orderButtonActionPerformed
 
@@ -175,15 +185,6 @@ public class ProductDesc extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     private double Price = 15.95;
-    
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ProductDesc().setVisible(true);
-            }
-        });
-        
-    }
 
     public void setDescTextArea(String descTextArea) {
         this.descTextArea.setText(descTextArea);

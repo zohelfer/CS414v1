@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Zacc.loginUI;
+package UI;
 
 /**
  *
@@ -35,7 +35,7 @@ public class EmpLogin extends javax.swing.JFrame {
         okButton = new javax.swing.JButton();
         errorLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         usernameLabel.setText("Username:");
 
@@ -121,10 +121,17 @@ public class EmpLogin extends javax.swing.JFrame {
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         // TODO add your handling code here:
         errorLabel.setVisible(false);
-        if(usernameTextField.getText().equals("Zacc") && passwordField.getText().equals("password"))
+        if(usernameTextField.getText().equals("Manager") && passwordField.getText().equals("password"))
         {
-            errorLabel.setText("Success!");
-            errorLabel.setVisible(true);
+            MainMenu menu = new MainMenu(true);
+            menu.setVisible(true);
+            this.setVisible(false);
+        }
+        else if (usernameTextField.getText().equals("Chef") && passwordField.getText().equals("password"))
+        {
+            chefUI chef = new chefUI();
+            chef.setVisible(true);
+            this.setVisible(false);
         }
         else
         {
@@ -135,7 +142,7 @@ public class EmpLogin extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
 
