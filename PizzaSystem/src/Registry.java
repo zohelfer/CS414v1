@@ -10,12 +10,16 @@ public class Registry { //Singleton class, represents the system information. Th
     static int orderNumbers = 0;
     static ArrayList<Order> currentOrders;
     static ArrayList<Customer> customers;
+    static ArrayList<Manager> managers;
+    static ArrayList<Chef> chefs;
 
     private static Registry aRegistry;
 
     private Registry() {
         currentOrders = new ArrayList<Order>();
         customers = new ArrayList<Customer>();
+        managers = new ArrayList<Manager>();
+        chefs = new ArrayList<Chef>();
     }
 
     public static Registry getInstance() {
