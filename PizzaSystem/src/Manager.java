@@ -1,7 +1,7 @@
 /**
  * Created by Nik on 10/2/14.
  */
-public class Manager {
+public class Manager implements User{
 
     String name;
     int empID;
@@ -10,6 +10,14 @@ public class Manager {
     public Manager(String name, int empID) {
         this.name = name;
         this.empID = empID;
+    }
+
+    public int getID(){
+        return empID;
+    }
+
+    public String getName(){
+        return name;
     }
 
     public void createMenu() {

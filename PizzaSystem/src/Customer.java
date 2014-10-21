@@ -1,16 +1,18 @@
 /**
  * Created by Nik on 10/2/14.
  */
-public class Customer {
+public class Customer implements User {
 
     String name;
     String phone;
     String address;
+    int id;
 
     Order currentOrder;
 
-    public Customer(String name, String phone) { //In store customer
+    public Customer(String name, int id) { //In store customer
         this.name = name;
+        this.id = id;
         Registry.addCustomer(this);
     }
 
@@ -38,7 +40,19 @@ public class Customer {
         Registry.addOrder(currentOrder);
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public int getID(){
+        return id;
+    }
+
     public void cancelOrder() {
         currentOrder = null;
+    }
+
+    public String toString(){
+        return "Customer: " + name + " " + id;
     }
 }
