@@ -52,7 +52,45 @@ public class Customer implements User {
         currentOrder = null;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String toString(){
         return "Customer " + id + ": " + name;
+    }
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Customer))
+            return false;
+        if (obj == this)
+            return true;
+
+        Customer aCustomer = (Customer) obj;
+        if(aCustomer.getName().equals(this.name) && aCustomer.getPhone() == this.phone && aCustomer.getAddress().equals(this.address) && aCustomer.getID() == this.id) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
