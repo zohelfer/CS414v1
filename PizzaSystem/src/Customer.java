@@ -13,16 +13,16 @@ public class Customer implements User {
     public Customer(String name, int id) { //In store customer
         this.name = name;
         this.id = id;
-        Registry.addCustomer(this);
+        //Registry.addCustomer(this);
     }
 
-    public Customer(String name, String phone, String address) { //Phone or online customer
+    public Customer(String name, int id, String phone, String address) { //Phone or online customer
         this.name = name;
+        this.id = id;
         this.phone = phone;
         this.address = address;
-        Registry.addCustomer(this);
+        //Registry.addCustomer(this);
     }
-
     public void createOrder() {
         currentOrder = new Order();
     }
@@ -53,6 +53,6 @@ public class Customer implements User {
     }
 
     public String toString(){
-        return "Customer: " + name + " " + id;
+        return "Customer " + id + ": " + name;
     }
 }

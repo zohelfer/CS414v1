@@ -21,6 +21,9 @@ public class Chef implements User{
         return name;
     }
 
+    public String toString(){
+        return "Chef " + empID + ": " + name;
+    }
     public ArrayList<Order> viewOrders() {
         return Registry.getCurrentOrders();
     }

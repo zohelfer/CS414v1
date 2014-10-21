@@ -20,6 +20,10 @@ public class Manager implements User{
         return name;
     }
 
+    public String toString(){
+        return "Manager " + empID + ": " + name;
+    }
+
     public void createMenu() {
         currentMenu = Menu.getInstance();
     }
