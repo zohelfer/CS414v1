@@ -5,7 +5,7 @@ import org.junit.Test;
 /**
  * Created by yabsubu12 on 10/23/14.
  */
-public class ChefTest {
+public class ManagerTest {
     @Test
     public void testGetID() throws Exception {
 

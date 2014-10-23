@@ -1,3 +1,5 @@
+import TempPackage.User;
+
 /**
  * Created by Nik on 10/2/14.
  */
@@ -6,8 +8,6 @@ public class Customer implements User {
     String name;
     String phone;
     String address;
-    String userName;
-    String password;
     private int custID;
 
     public Customer(String name, int id, String phone, String address) {

@@ -18,7 +18,6 @@ public class Menu { //Singleton class, only 1 menu can exist.
         if (aMenu == null) {
             aMenu = new Menu();
         }
-
         return aMenu;
     }
 
@@ -46,15 +45,12 @@ public class Menu { //Singleton class, only 1 menu can exist.
         }
     }
 
-    public void setSpecial(String name, boolean isSpecial) {
+    public void setSpecial(String name) {
         for(MenuItem anItem: menuItems) {
             if(anItem.getName().equals(name)) {
-                anItem.setSpecial(isSpecial);
-                if(isSpecial) {             //Making an item the special
-                    currentSpecial = anItem;
-                } else {                    //Removing an item from being the special
-                    currentSpecial = null;
-                }
+                anItem.makeSpecial();
+                currentSpecial = anItem;
+                break;
             }
         }
     }

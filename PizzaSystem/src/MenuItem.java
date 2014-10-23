@@ -33,7 +33,7 @@ public class MenuItem {
         return isSpecial;
     }
 
-    public void setSpecial(boolean isSpecial) {
-        this.isSpecial = isSpecial;
+    public void makeSpecial() {
+        this.isSpecial = true;
     }
 }
