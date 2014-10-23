@@ -14,7 +14,6 @@ public class Registry {
     static ArrayList<Customer> customers;
     static ArrayList<Manager> managers;
     static ArrayList<Chef> chefs;
-    static ArrayList<Login> logins;
     static ArrayList<MenuItem> menu;
 
     private Reader fileReader;
@@ -62,10 +61,6 @@ public class Registry {
 
     public static void removeOrder(Order anOrder) {
         currentOrders.remove(anOrder);
-    }
-
-    public static void addLogin(Login aLogin) {
-        logins.add(aLogin);
     }
 
     public static Integer getNewOrderNumber() {
@@ -116,14 +111,6 @@ public class Registry {
 
     public static void setChefs(ArrayList<Chef> chefs) {
         Registry.chefs = chefs;
-    }
-
-    public static ArrayList<Login> getLogins() {
-        return logins;
-    }
-
-    public static void setLogins(ArrayList<Login> logins) {
-        Registry.logins = logins;
     }
 
 }
