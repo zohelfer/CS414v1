@@ -1,5 +1,3 @@
-import UI.MenuItem;
-
 import java.util.ArrayList;
 
 /**
@@ -7,7 +5,7 @@ import java.util.ArrayList;
  */
 public class Menu { //Singleton class, only 1 menu can exist.
 
-    ArrayList<UI.MenuItem> menuItems;
+    ArrayList<MenuItem> menuItems;
     MenuItem currentSpecial;
     private static Menu aMenu;
 

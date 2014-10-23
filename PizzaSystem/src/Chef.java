@@ -1,13 +1,9 @@
-import UI.*;
-import UI.Order;
-import UI.Registry;
-
 import java.util.ArrayList;
 
 /**
  * Created by Nik on 10/2/14.
  */
-public class Chef implements UI.User {
+public class Chef implements User {
 
     String name;
     int empID;

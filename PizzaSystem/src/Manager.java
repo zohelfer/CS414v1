@@ -1,10 +1,7 @@
-import UI.*;
-import UI.Menu;
-
 /**
  * Created by Nik on 10/2/14.
  */
-public class Manager implements UI.User {
+public class Manager implements User {
 
     String name;
     int empID;

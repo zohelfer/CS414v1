@@ -17,6 +17,13 @@ public class Order {
         isComplete = false;
     }
 
+    public Order(ArrayList<MenuItem> orderList, int orderNumber, double amountDue, boolean isComplete){
+        this.orderList = orderList;
+        this.orderNumber = orderNumber;
+        this.amountDue = amountDue;
+        this.isComplete = isComplete;
+    }
+
     public void addItem(MenuItem anItem) {
         orderList.add(anItem);
     }
