@@ -24,16 +24,11 @@ public class Chef implements User {
     public String toString(){
         return "Chef " + empID + ": " + name;
     }
-    public ArrayList<Order> viewOrders() {
-        return Registry.getCurrentOrders();
-    }
-
-    public void markComplete(int orderNumber) {
-        ArrayList<Order> currentOrders = viewOrders();
-        for(Order anOrder: currentOrders) {
-            if(anOrder.getOrderNumber() == orderNumber) {
-                anOrder.setComplete(true);
-            }
-        }
-    }
 }
+
+
+
+
+
+
+

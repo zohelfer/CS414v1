@@ -6,7 +6,8 @@ import java.util.Random;
  */
 
 //This class is a bit conceptual right now.  We might end up deleting it later on.
-public class Registry { //Singleton class, represents the system information. This may also be a controller.
+//Singleton class, represents the system information. This may also be a controller.
+public class Registry {
 
     static ArrayList<Integer> orderNumbers;
     static ArrayList<Order> currentOrders;
@@ -14,11 +15,17 @@ public class Registry { //Singleton class, represents the system information. Th
     static ArrayList<Manager> managers;
     static ArrayList<Chef> chefs;
     static ArrayList<Login> logins;
+    static ArrayList<MenuItem> menu;
 
+    private Reader fileReader;
+    private Writer fileWriter;
     private static Registry aRegistry;
 
     private Registry() {
-        currentOrders = new ArrayList<Order>();
+        fileReader = new Reader();
+        fileWriter = new Writer();
+        currentOrders = fileReader.readOrders();
+        menu = fileReader.readMenu();
         customers = new ArrayList<Customer>();
         managers = new ArrayList<Manager>();
         chefs = new ArrayList<Chef>();
@@ -28,7 +35,6 @@ public class Registry { //Singleton class, represents the system information. Th
         if (aRegistry == null) {
             aRegistry = new Registry();
         }
-
         return aRegistry;
     }
 

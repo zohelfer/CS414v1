@@ -60,8 +60,8 @@ public class Order {
         return isComplete;
     }
 
-    public void setComplete(boolean isComplete) {
-        this.isComplete = isComplete;
+    public void markComplete() {
+        this.isComplete = true;
     }
 
 }
