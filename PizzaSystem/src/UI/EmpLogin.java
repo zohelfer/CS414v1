@@ -36,6 +36,7 @@ public class EmpLogin extends javax.swing.JFrame {
         errorLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(500, 250, 0, 0));
 
         usernameLabel.setText("Username:");
 

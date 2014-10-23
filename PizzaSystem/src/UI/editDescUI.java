@@ -41,7 +41,8 @@ public class editDescUI extends javax.swing.JFrame {
         descTextArea = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(500, 250, 0, 0));
         setResizable(false);
 
         jLabel1.setText("Name:");

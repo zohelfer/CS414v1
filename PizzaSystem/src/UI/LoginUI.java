@@ -32,6 +32,7 @@ public class LoginUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(500, 250, 0, 0));
 
         buttonCus.setText("Customer Login");
         buttonCus.addActionListener(new java.awt.event.ActionListener() {
