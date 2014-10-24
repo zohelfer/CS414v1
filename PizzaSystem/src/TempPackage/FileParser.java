@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 
 public class FileParser {
+    /*
     private UserFactory uF;
 
     public FileParser(){
@@ -72,4 +73,5 @@ public class FileParser {
         }
 
     }
+    */
 }

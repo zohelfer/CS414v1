@@ -1,4 +1,4 @@
-package Contollers;
+package TempPackage;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Nik on 10/2/14.
  */
 public class Menu { //Singleton class, only 1 menu can exist.
-
+/*
     ArrayList<MenuItem> menuItems;
     MenuItem currentSpecial;
     private static Menu aMenu;
@@ -59,4 +59,5 @@ public class Menu { //Singleton class, only 1 menu can exist.
     public ArrayList<MenuItem> getMenuItems() {
     	return menuItems;
     }
+    */
 }

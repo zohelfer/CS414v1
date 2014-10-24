@@ -2,12 +2,14 @@ package Contollers;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Reader {
-	public ArrayList<MenuItem> readMenu() {
-		ArrayList<MenuItem> m = new ArrayList<MenuItem>();
+	public Set<MenuItem> readMenu() {
+		Set<MenuItem> m = new HashSet<MenuItem>();
 		MenuItem mi;
 		try {
 			Scanner scan = new Scanner(new File("MENU"));

@@ -10,7 +10,7 @@ import java.util.Random;
 //This class is a bit conceptual right now.  We might end up deleting it later on.
 //Singleton class, represents the system information. This may also be a controller.
 public class Registry {
-
+    /*
     static ArrayList<Integer> orderNumbers;
     static ArrayList<Order> currentOrders;
     static ArrayList<Customer> customers;
@@ -114,5 +114,6 @@ public class Registry {
     public static void setChefs(ArrayList<Chef> chefs) {
         Registry.chefs = chefs;
     }
+    */
 
 }

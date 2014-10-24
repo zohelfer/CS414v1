@@ -38,4 +38,12 @@ public class MenuItem {
     public void makeSpecial() {
         this.isSpecial = true;
     }
+
+    public boolean equals(Object o){
+        if(!(o instanceof MenuItem)) return false;
+
+        MenuItem newM = (MenuItem) o;
+
+        return this.getName().equalsIgnoreCase(newM.getName());
+    }
 }

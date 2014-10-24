@@ -5,18 +5,22 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import java.util.Set;
 
 public class Writer {
 
-	public void writeMenu(Menu m) {
+	public boolean writeMenu(Set<MenuItem> m) {
+        boolean wroteSuccess;
 		try {
 			PrintWriter pw = new PrintWriter(new File("MENU"));
-			for(MenuItem item : m.getMenuItems()) {
+			for(MenuItem item : m) {
 				pw.println(item.getName() + " " + item.getPrice() + " " + item.isSpecial());
 			}
 			pw.close();
+            wroteSuccess = true;
 		}
-		catch(FileNotFoundException e) { }
+		catch(FileNotFoundException e) { wroteSuccess = false; }
+        return wroteSuccess;
 	}
     public void writeOrders(ArrayList<Order> order) {
         try {

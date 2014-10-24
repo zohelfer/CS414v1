@@ -11,5 +11,6 @@ public class OrderController {
     }
 
     private OrderController() {
+
     }
 }
