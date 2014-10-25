@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class MenuControllerTest {
 
-    MenuController mc;
+    MenuController mc= MenuController.getInstance();
 
     @Test
     public void testGetInstance() throws Exception {
@@ -24,14 +24,12 @@ public class MenuControllerTest {
 
     @Test
     public void testLoadMenu() throws Exception {
-        mc = MenuController.getInstance();
         assertNotNull(mc.loadMenu());
     }
     // Test items are loaded properly as a set
 
     @Test
     public void testAddNewItem() throws Exception {
-        mc = MenuController.getInstance();
         int initSize = mc.loadMenu().size();
         mc.addItem("Donuts", 4.5, false);
         int newSize = mc.loadMenu().size();
@@ -41,7 +39,6 @@ public class MenuControllerTest {
 
     @Test
     public void testRemoveItem() throws Exception {
-        mc = MenuController.getInstance();
         int initSize = mc.loadMenu().size();
         mc.removeItem("Pepperoni", 3.5, false);
         int newSize = mc.loadMenu().size();
