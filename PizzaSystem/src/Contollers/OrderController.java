@@ -14,6 +14,7 @@ public class OrderController {
     private Writer fileWriter;
 
     private OrderController() {
+        fileWriter = new Writer();
 
     }
 }

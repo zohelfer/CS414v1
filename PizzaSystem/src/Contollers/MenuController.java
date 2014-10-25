@@ -1,6 +1,7 @@
 package Contollers;
 
 import java.io.BufferedWriter;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 /**
@@ -13,7 +14,7 @@ public class MenuController {
         return ourInstance;
     }
 
-    private Set<MenuItem> menuItems;
+    private HashSet<MenuItem> menuItems;
     private Reader fileReader;
     private Writer fileWriter;
 
