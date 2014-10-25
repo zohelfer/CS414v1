@@ -1,5 +1,7 @@
 package Contollers;
 
+import TempPackage.Menu;
+
 import java.io.BufferedWriter;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -21,6 +23,7 @@ public class MenuController {
     private MenuController() {
         fileReader = new Reader();
         fileWriter = new Writer();
+        menuItems = new HashSet<MenuItem>();
         menuItems = fileReader.readMenu();
     }
 
@@ -38,7 +41,14 @@ public class MenuController {
     // Remove item is clicked
     // Returns False: Item did not exist in set
     public boolean removeItem(String n, double p, boolean isS){
-        return menuItems.remove(new MenuItem(n,p,isS));
+        MenuItem lookingFor = new MenuItem(n,p,isS);
+        for(MenuItem m : this.menuItems){
+            if(m.equals(lookingFor)){
+                this.menuItems.remove(m);
+                return true;
+            }
+        }
+        return false;
     }
 
     // Save menu is pressed

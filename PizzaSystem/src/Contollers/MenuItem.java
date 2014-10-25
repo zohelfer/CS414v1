@@ -42,11 +42,9 @@ public class MenuItem {
     }
 
     public boolean equals(Object o){
-        System.out.println("COMPAIRING");
         if(o instanceof MenuItem){
             MenuItem newM = (MenuItem) o;
-            System.out.println("Comparing:" + newM.getName() + this.getName());
-            return this.name.equalsIgnoreCase(newM.name);
+            return this.name.equalsIgnoreCase(newM.getName());
         }
         return false;
     }

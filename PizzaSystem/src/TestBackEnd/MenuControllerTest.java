@@ -32,20 +32,20 @@ public class MenuControllerTest {
     @Test
     public void testAddNewItem() throws Exception {
         mc = MenuController.getInstance();
-        System.out.println(mc.loadMenu());
+        int initSize = mc.loadMenu().size();
         mc.addItem("Donuts", 4.5, false);
-        System.out.println(mc.loadMenu());
-        System.out.println(mc.loadMenu().contains(new MenuItem("Donuts", 4.5, false)));
+        int newSize = mc.loadMenu().size();
+        assertEquals(initSize + 1, newSize);
     }
     // Add test for adding null existing item
 
     @Test
     public void testRemoveItem() throws Exception {
         mc = MenuController.getInstance();
-        Set<MenuItem> menuItems = mc.loadMenu();
-        MenuItem removed = new MenuItem("Pepperoni", 3.5, false);
+        int initSize = mc.loadMenu().size();
         mc.removeItem("Pepperoni", 3.5, false);
-        assertFalse(menuItems.contains(removed));
+        int newSize = mc.loadMenu().size();
+        assertEquals(initSize -1, newSize);
     }
 
     @Test
