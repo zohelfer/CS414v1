@@ -446,6 +446,9 @@
                 </Property>
                 <Property name="selectionMode" type="int" value="0"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JList(order);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

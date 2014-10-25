@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package UI;
+
+import Contollers.MenuItem;
+
 /**
  *
  * @author zacc
@@ -15,18 +18,19 @@ public class ProductDesc extends javax.swing.JFrame {
      */
     private MainMenu menu;
     
-    public ProductDesc(MainMenu mm) {
+    public ProductDesc(MenuItem item) {
         initComponents();
-        this.menu = mm;
-        
-        if(menu.ManagerMode)
-        {
-            editButton.setVisible(true);
-        }
-        else
-        {
-            editButton.setVisible(false);
-        }
+        //this.menu = mm;
+        this.setPizzaNameLabel(item.getName());
+        this.setPriceLabel(String.format( "%.2f",item.getPrice()));
+//        if(menu.ManagerMode)
+//        {
+//            editButton.setVisible(true);
+//        }
+//        else
+//        {
+//            editButton.setVisible(false);
+//        }
     }
 
     /**
@@ -37,7 +41,7 @@ public class ProductDesc extends javax.swing.JFrame {
    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-       // bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
+//        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         picture = new javax.swing.JLabel();
         pizzaNameLabel = new javax.swing.JLabel();
@@ -55,8 +59,8 @@ public class ProductDesc extends javax.swing.JFrame {
         setBounds(new java.awt.Rectangle(500, 250, 0, 0));
         setResizable(false);
 
-      //  org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, picture, org.jdesktop.beansbinding.ELProperty.create("${icon}"), picture, org.jdesktop.beansbinding.BeanProperty.create("icon"));
-      //  bindingGroup.addBinding(binding);
+//        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, picture, org.jdesktop.beansbinding.ELProperty.create("${icon}"), picture, org.jdesktop.beansbinding.BeanProperty.create("icon"));
+//        bindingGroup.addBinding(binding);
 
         pizzaNameLabel.setText("PIZZA NAME");
 
@@ -155,7 +159,7 @@ public class ProductDesc extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-       // bindingGroup.bind();
+//        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -223,7 +227,7 @@ public class ProductDesc extends javax.swing.JFrame {
     private javax.swing.JLabel pizzaNameLabel;
     private javax.swing.JLabel priceLabel;
     private javax.swing.JComboBox qtyComboBox;
-  //  private org.jdesktop.beansbinding.BindingGroup bindingGroup;
+//    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
 

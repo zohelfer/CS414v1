@@ -14,7 +14,10 @@ public class EmpLogin extends javax.swing.JFrame {
     /**
      * Creates new form CustLogin
      */
-    public EmpLogin() {
+    private MainMenu menu;
+    
+    public EmpLogin(MainMenu menu) {
+        this.menu = menu;
         initComponents();
     }
 
@@ -124,15 +127,15 @@ public class EmpLogin extends javax.swing.JFrame {
         errorLabel.setVisible(false);
         if(usernameTextField.getText().equals("Manager") && passwordField.getText().equals("password"))
         {
-            MainMenu menu = new MainMenu(true);
-            menu.setVisible(true);
-            this.setVisible(false);
+            menu.ManagerMode(true);
+            this.dispose();
         }
         else if (usernameTextField.getText().equals("Chef") && passwordField.getText().equals("password"))
         {
             chefUI chef = new chefUI();
             chef.setVisible(true);
-            this.setVisible(false);
+            this.dispose();
+            menu.dispose();
         }
         else
         {
