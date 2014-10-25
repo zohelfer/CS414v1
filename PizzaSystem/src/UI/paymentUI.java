@@ -5,6 +5,9 @@
  */
 package UI;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+
 /**
  *
  * @author zacc
@@ -14,11 +17,17 @@ package UI;
 public class paymentUI extends javax.swing.JFrame {
 
     private boolean payWithCard = true;
-    /**
-     * Creates new form paymentUI
-     */
+    private DefaultListModel order;
+    
     public paymentUI() {
+        this.order = new DefaultListModel();
         initComponents();
+    }
+    
+    public paymentUI(DefaultListModel order) {
+        this.order = order;
+        initComponents();
+        
     }
 
     /**
@@ -59,7 +68,7 @@ public class paymentUI extends javax.swing.JFrame {
         errorMessageLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        orderList = new javax.swing.JList();
+        orderList = new JList(order);
         jLabel7 = new javax.swing.JLabel();
         totalPriceLabel = new javax.swing.JLabel();
 
