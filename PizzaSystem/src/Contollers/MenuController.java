@@ -18,6 +18,8 @@ public class MenuController {
     private Writer fileWriter;
 
     private MenuController() {
+        fileReader = new Reader();
+        fileWriter = new Writer();
         menuItems = fileReader.readMenu();
     }
 
@@ -49,14 +51,13 @@ public class MenuController {
     public boolean editItem(String oldName, String newName, double newP, boolean newSpecial){
         MenuItem newMI = new MenuItem(newName, newP, newSpecial);
 
-        Iterator<MenuItem> iterMI = menuItems.iterator();
-        while(iterMI.hasNext()){
-            MenuItem curr = iterMI.next();
-            if(curr.equals(newMI)){ // Compares name
-                menuItems.remove(curr); // removes
+        for(MenuItem mi: menuItems){
+            if(mi.equals(newMI)){
+                menuItems.remove(mi);
                 break;
             }
         }
         return menuItems.add(newMI);
     }
+
 }

@@ -10,6 +10,9 @@ public class OrderController {
         return ourInstance;
     }
 
+    private Reader fileReader;
+    private Writer fileWriter;
+
     private OrderController() {
 
     }
