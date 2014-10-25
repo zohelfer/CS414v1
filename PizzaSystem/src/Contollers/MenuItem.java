@@ -1,13 +1,15 @@
 package Contollers;
 
+import TempPackage.Menu;
+
 /**
  * Created by Nik on 10/2/14.
  */
 public class MenuItem {
 
-    String name;
-    double price;
-    boolean isSpecial;
+    private String name;
+    private double price;
+    private boolean isSpecial;
 
     public MenuItem(String name, double price, boolean isSpecial) {
         this.name = name;
@@ -40,10 +42,16 @@ public class MenuItem {
     }
 
     public boolean equals(Object o){
-        if(!(o instanceof MenuItem)) return false;
+        System.out.println("COMPAIRING");
+        if(o instanceof MenuItem){
+            MenuItem newM = (MenuItem) o;
+            System.out.println("Comparing:" + newM.getName() + this.getName());
+            return this.name.equalsIgnoreCase(newM.name);
+        }
+        return false;
+    }
 
-        MenuItem newM = (MenuItem) o;
-
-        return this.getName().equalsIgnoreCase(newM.getName());
+    public String toString(){
+        return "MenuItem: " + this.name + " " + this.price + " " + this.isSpecial;
     }
 }

@@ -25,20 +25,27 @@ public class MenuControllerTest {
     @Test
     public void testLoadMenu() throws Exception {
         mc = MenuController.getInstance();
-        Set<MenuItem> menuItems = mc.loadMenu();
-        MenuItem testItem = new MenuItem("Pepperoni", 3.5, false);
-        assertTrue(menuItems.contains(testItem));
+        assertNotNull(mc.loadMenu());
     }
+    // Test items are loaded properly as a set
 
     @Test
-    public void testAddItem() throws Exception {
+    public void testAddNewItem() throws Exception {
         mc = MenuController.getInstance();
-
+        System.out.println(mc.loadMenu());
+        mc.addItem("Donuts", 4.5, false);
+        System.out.println(mc.loadMenu());
+        System.out.println(mc.loadMenu().contains(new MenuItem("Donuts", 4.5, false)));
     }
+    // Add test for adding null existing item
 
     @Test
     public void testRemoveItem() throws Exception {
-
+        mc = MenuController.getInstance();
+        Set<MenuItem> menuItems = mc.loadMenu();
+        MenuItem removed = new MenuItem("Pepperoni", 3.5, false);
+        mc.removeItem("Pepperoni", 3.5, false);
+        assertFalse(menuItems.contains(removed));
     }
 
     @Test

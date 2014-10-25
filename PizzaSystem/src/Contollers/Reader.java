@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Reader {
-	public Set<MenuItem> readMenu() {
-		Set<MenuItem> m = new HashSet<MenuItem>();
+	public HashSet<MenuItem> readMenu() {
+		HashSet<MenuItem> m = new HashSet<MenuItem>();
 		MenuItem mi;
 		try {
 			Scanner scan = new Scanner(new File("MENU"));
@@ -22,7 +22,9 @@ public class Reader {
             }
 			scan.close();
 		}
-		catch(FileNotFoundException e) { }
+		catch(FileNotFoundException e) {
+            System.err.print("Could not find file\n");
+        }
 		return m;
 	}
 	public ArrayList<Order> readOrders() {
@@ -50,7 +52,7 @@ public class Reader {
 			scan.close();
 		}
 		catch(FileNotFoundException e) {
-			
+            System.err.print("Could not find file\n");
 		}
 		return o;
 	}
