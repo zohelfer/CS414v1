@@ -6,6 +6,8 @@
 package UI;
 
 import Contollers.MenuItem;
+import Contollers.OrderController;
+import TempPackage.Order;
 
 /**
  *
@@ -17,10 +19,13 @@ public class ProductDesc extends javax.swing.JFrame {
      * Creates new form ProductDesc
      */
     private MainMenu menu;
+    private MenuItem item;
+    private double Price;
     
-    public ProductDesc(MenuItem item) {
+    public ProductDesc(MainMenu mm,MenuItem item) {
         initComponents();
-        //this.menu = mm;
+       this.menu = mm;
+        this.item = item;
         this.setPizzaNameLabel(item.getName());
         this.setPriceLabel(String.format( "%.2f",item.getPrice()));
 //        if(menu.ManagerMode)
@@ -166,14 +171,11 @@ public class ProductDesc extends javax.swing.JFrame {
 
     private void orderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderButtonActionPerformed
         // TODO add your handling code here:
-        String item = "";
-        item += pizzaNameLabel.getText();
-        item += "   ";
-        item += qtyComboBox.getSelectedItem();
-        item += "   ";
-        item += priceLabel.getText();
-        menu.addOrder(item);
-        menu.updatePrice(Double.parseDouble(priceLabel.getText()), true);
+        for (int i = 0; i < Integer.parseInt(qtyComboBox.getSelectedItem().toString()); i++)
+        {
+            OrderController.getInstance().addToOrder(item.getName(),item.getPrice(),item.isSpecial());
+        }
+        menu.UpdateOrder();
         this.setVisible(false);
     }//GEN-LAST:event_orderButtonActionPerformed
 
@@ -198,7 +200,7 @@ public class ProductDesc extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    private double Price = 15.95;
+
 
     public void setDescTextArea(String descTextArea) {
         this.descTextArea.setText(descTextArea);
