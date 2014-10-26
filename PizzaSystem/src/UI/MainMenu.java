@@ -5,6 +5,7 @@
  */
 package UI;
 
+import Contollers.ItemType;
 import Contollers.MenuController;
 
 import javax.swing.*;
@@ -24,41 +25,15 @@ import Contollers.OrderController;
 
 public class MainMenu extends javax.swing.JFrame {
 
-    private class pizzaActionListener implements ActionListener {
+    private class buttonActionListener implements ActionListener {
         private MainMenu menu;
 
-        public pizzaActionListener(MainMenu menu) {
+        public buttonActionListener(MainMenu menu) {
             this.menu = menu;
         }
 
         public void actionPerformed(ActionEvent event) {
-            int i = pizzaButtonList.indexOf(event.getSource());
-            ProductDesc PD = new ProductDesc(menu,convert(MenuController.getInstance().loadMenu()).get(i));
-            PD.setVisible(true);
-        }
-    }
-    private class drinkActionListener implements ActionListener {
-        private MainMenu menu;
-
-        public drinkActionListener(MainMenu menu) {
-            this.menu = menu;
-        }
-
-        public void actionPerformed(ActionEvent event) {
-            int i = drinkButtonList.indexOf(event.getSource());
-            ProductDesc PD = new ProductDesc(menu,convert(MenuController.getInstance().loadMenu()).get(i));
-            PD.setVisible(true);
-        }
-    }
-    private class specialActionListener implements ActionListener {
-        private MainMenu menu;
-
-        public specialActionListener(MainMenu menu) {
-            this.menu = menu;
-        }
-
-        public void actionPerformed(ActionEvent event) {
-            int i = specialButtonList.indexOf(event.getSource());
+            int i = ButtonList.indexOf(event.getSource());
             ProductDesc PD = new ProductDesc(menu,convert(MenuController.getInstance().loadMenu()).get(i));
             PD.setVisible(true);
         }
@@ -92,30 +67,34 @@ public class MainMenu extends javax.swing.JFrame {
         return output;
     }
 
+    ArrayList<JButton> ButtonList = new ArrayList<JButton>();
     ArrayList<JButton> pizzaButtonList = new ArrayList<JButton>();
+    ArrayList<JButton> drinkButtonList = new ArrayList<JButton>();
+    ArrayList<JButton> specialButtonList = new ArrayList<JButton>();
     private JButton createPizzaButton(String buttonName){
         JButton button = new JButton(buttonName);
         button.setPreferredSize(new Dimension(100,100));
+        ButtonList.add(button);
         pizzaButtonList.add(button);
-        button.addActionListener(new pizzaActionListener(this));
+        button.addActionListener(new buttonActionListener(this));
         return button;
     }
 
-    ArrayList<JButton> drinkButtonList = new ArrayList<JButton>();
     private JButton createDrinkButton(String buttonName){
         JButton button = new JButton(buttonName);
         button.setPreferredSize(new Dimension(100,50));
+        ButtonList.add(button);
         drinkButtonList.add(button);
-        button.addActionListener(new drinkActionListener(this));
+        button.addActionListener(new buttonActionListener(this));
         return button;
     }
 
-    ArrayList<JButton> specialButtonList = new ArrayList<JButton>();
     private JButton createSpecialButton(String buttonName){
         JButton button = new JButton(buttonName);
         button.setPreferredSize(new Dimension(100,50));
+        ButtonList.add(button);
         specialButtonList.add(button);
-        button.addActionListener(new specialActionListener(this));
+        button.addActionListener(new buttonActionListener(this));
         return button;
     }
     
@@ -170,15 +149,25 @@ public class MainMenu extends javax.swing.JFrame {
 
         for (Contollers.MenuItem m : MenuController.getInstance().loadMenu())
         {
-            String test = m.getName();
-            createPizzaButton(test);
+            String name = m.getName();
+            if(m.getType().equals(ItemType.PIZZA)) {
+                createPizzaButton(name);
+            }
+            else if (m.getType().equals(ItemType.DRINK))
+            {
+                createDrinkButton(name);
+            }
+            else if (m.getType().equals(ItemType.SPECIAL))
+            {
+                createSpecialButton(name);
+            }
         }
 
        // javax.swing.GroupLayout pizzaPanelLayout = new javax.swing.GroupLayout(pizzaPanel);
         pizzaPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         pizzaPanel.setPreferredSize(new Dimension(350,50));
         JPanel pizzaGrid = new javax.swing.JPanel();
-        pizzaGrid.setLayout(new GridLayout(3,pizzaButtonList.size()/3));
+        pizzaGrid.setLayout(new GridLayout(3,3));
         for(JButton pizza : pizzaButtonList)
         {
             pizzaGrid.add(pizza);
@@ -189,9 +178,9 @@ public class MainMenu extends javax.swing.JFrame {
         drinkPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Drinks"));
 
         drinkPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        drinkPanel.setPreferredSize(new Dimension(350,50));
+        drinkPanel.setPreferredSize(new Dimension(350,100));
         JPanel drinkGrid = new javax.swing.JPanel();
-        drinkGrid.setLayout(new GridLayout(2,drinkButtonList.size()/2));
+        drinkGrid.setLayout(new GridLayout(2,2));
         for(JButton drink : drinkButtonList)
         {
             drinkGrid.add(drink);
@@ -246,14 +235,14 @@ public class MainMenu extends javax.swing.JFrame {
         specialPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Special Items"));
 
         specialPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        specialPanel.setPreferredSize(new Dimension(350,50));
+        specialPanel.setPreferredSize(new Dimension(350,100));
         JPanel specialGrid = new javax.swing.JPanel();
-        specialGrid.setLayout(new GridLayout(2,specialButtonList.size()/2));
+        specialGrid.setLayout(new GridLayout(2,2));
         for(JButton special : specialButtonList)
         {
             specialGrid.add(special);
         }
-        specialPanel.add(drinkGrid);
+        specialPanel.add(specialGrid);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);

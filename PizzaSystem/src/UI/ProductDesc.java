@@ -30,9 +30,9 @@ public class ProductDesc extends javax.swing.JFrame {
     private double Price;
     
     public ProductDesc(MainMenu mm,MenuItem item) {
-        initComponents();
-       this.menu = mm;
+        this.menu = mm;
         this.item = item;
+        initComponents();
         this.setPizzaNameLabel(item.getName());
         this.setPriceLabel(String.format( "%.2f",item.getPrice()));
     }
@@ -80,9 +80,30 @@ public class ProductDesc extends javax.swing.JFrame {
         jLabel4.setText("Total Price:");
 
         priceLabel.setText(String.format( "%.2f", Price));
-        priceLabel.setToolTipText("");
 
-        imageLabel.setText("Image");
+        BufferedImage itemPicture = null;
+        String filepath = "";
+        if(item.getTypeString().equals(ItemType.PIZZA))
+        {
+            filepath = "images/pizza-icon.png";
+        }
+        else if (item.getType().equals(ItemType.DRINK))
+        {
+            filepath = "images/soft-drinks.png";
+        }
+        else
+        {
+            filepath = "images/pizza-icon.png";
+        }
+
+        try {
+            itemPicture = ImageIO.read(new File(filepath));
+        } catch (IOException e) {
+            System.err.println("Can not find file");
+        }
+        if (itemPicture != null) {
+            picture = new JLabel(new ImageIcon(itemPicture));
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,29 +151,7 @@ public class ProductDesc extends javax.swing.JFrame {
                                 .addComponent(orderButton)
                                 .addContainerGap())
         );
-        BufferedImage itemPicture = null;
-        String filepath = "";
-        if(item.getType().equals(ItemType.PIZZA))
-        {
-            filepath = "UI/images/pizza-icon.png";
-        }
-        else if (item.getType().equals(ItemType.DRINK))
-        {
-            filepath = "UI/images/soft-drinks.png";
-        }
-        else
-        {
-            filepath = "UI/images/pizza-icon.png";
-        }
 
-        try {
-            itemPicture = ImageIO.read(new File(filepath));
-        } catch (IOException e) {
-
-        }
-        if (itemPicture != null) {
-            picture = new JLabel(new ImageIcon(itemPicture));
-        }
         pack();
     }// </editor-fold>
 
