@@ -64,7 +64,7 @@ public class UsersController {
     public boolean createNewCust(String n, String p, String a, String e, String pass){
         boolean customerE = customers.add(new Customer(n,p,a,e,getUniqueID()));
         fileWriter.writeCustomer(customers);
-        logins.put(n,pass);
+        logins.put(e,pass);
         fileWriter.writeLogin(logins);
         ourInstance = reloadUsersCont();
         return customerE;
