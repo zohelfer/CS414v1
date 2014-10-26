@@ -1,5 +1,6 @@
 package TestBackEnd;
 
+import Contollers.ItemType;
 import Contollers.MenuController;
 import TempPackage.Menu;
 import org.junit.Test;
@@ -31,7 +32,7 @@ public class MenuControllerTest {
     @Test
     public void testAddNewItem() throws Exception {
         int initSize = mc.loadMenu().size();
-        mc.addItem("Donuts", 4.5, false);
+        mc.addItem("Donuts", 4.5, ItemType.SPECIAL);
         int newSize = mc.loadMenu().size();
         assertEquals(initSize + 1, newSize);
     }
@@ -40,7 +41,7 @@ public class MenuControllerTest {
     @Test
     public void testRemoveItem() throws Exception {
         int initSize = mc.loadMenu().size();
-        mc.removeItem("Pepperoni", 3.5, false);
+        mc.removeItem("Pepperoni", 3.5, ItemType.SPECIAL);
         int newSize = mc.loadMenu().size();
         assertEquals(initSize -1, newSize);
     }

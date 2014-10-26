@@ -1,5 +1,6 @@
 package TestBackEnd;
 
+import Contollers.ItemType;
 import org.junit.Test;
 import Contollers.OrderController;
 
@@ -14,7 +15,7 @@ public class OrderControllerTest {
 
     private String iName = "New";
     private double iP = 4.0;
-    private boolean isS = false;
+    private ItemType isS = ItemType.SPECIAL;
 
     public int testAdd(int quantity){
         oc.resetInstance();
@@ -70,7 +71,7 @@ public class OrderControllerTest {
     @Test
     public void testSubmitOrder() throws Exception {
         testAdd(20);
-        oc.addToOrder("Another", 2332.0, false);
+        oc.addToOrder("Another", 2332.0, ItemType.DRINK);
         assertTrue(oc.submitOrder());
         oc.resetInstance();
     }
