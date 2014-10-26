@@ -66,7 +66,7 @@ public class MenuController {
         MenuItem newMI = new MenuItem(newName, newP, type);
 
         for(MenuItem mi: menuItems){
-            if(oldName.equals(newMI.getName())){
+            if(oldName.equals(mi.getName())){
                 menuItems.remove(mi);
                 return menuItems.add(newMI);
             }
