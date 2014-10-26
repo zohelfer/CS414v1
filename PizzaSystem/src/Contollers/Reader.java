@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Reader {
 
     private String spaceDelimiter = " ";
-    private String starDelimiter = "*";
+    private String starDelimiter = "~";
 
     public HashSet<MenuItem> readMenu() {
 		HashSet<MenuItem> m = new HashSet<MenuItem>();
@@ -120,6 +120,29 @@ public class Reader {
         }
 
         return customers;
+    }
+    public Hashtable<String, String> readLogin(){
+        Hashtable<String, String> logins = new Hashtable<String, String>();
+        try{
+            File f = new File(FileName.LOGIN.name());
+            if(!f.exists()){
+                f.createNewFile();
+                return logins;
+            }
+            synchronized (f){
+                BufferedReader bfr = new BufferedReader(new FileReader(f));
+                String line;
+                while((line = bfr.readLine()) != null){
+                    String[] allLines = line.split(spaceDelimiter);
+                    logins.put(allLines[0],allLines[1]);
+                }
+            }
+        }
+        catch(IOException ioE){
+            System.err.print("Error with " + FileName.INCOMPLETE.name());
+            return new Hashtable<String, String>();
+        }
+        return logins;
     }
     /*
     public static void main(String[]args ) {

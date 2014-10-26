@@ -8,5 +8,6 @@ public enum FileName {
     INCOMPLETE,
     MENU,
     CUSTOMER,
-    MANAGER
+    MANAGER,
+    LOGIN
 }

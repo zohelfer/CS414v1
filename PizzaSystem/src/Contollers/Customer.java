@@ -1,7 +1,5 @@
 package Contollers;
 
-import TempPackage.User;
-
 /**
  * Created by Nik on 10/2/14.
  */
@@ -12,6 +10,8 @@ public class Customer implements User {
     String address;
     String email;
     private int custID;
+
+    private String starDelim = "~";
 
     public Customer(String name, String phone, String address, String email, int id) {
         this.name = name;
@@ -42,7 +42,14 @@ public class Customer implements User {
     public void setAddress(String address) { this.address = address; }
 
     // make sure this matches what's in file
-    public String toString(){ return custID + " " + name; }
+    public String toString(){
+        return name + starDelim +
+                phone + starDelim +
+                address + starDelim +
+                email + starDelim +
+                custID
+            ;
+    }
 
     public boolean equals(Object obj) {
         if (!(obj instanceof Customer))

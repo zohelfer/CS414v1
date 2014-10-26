@@ -1,6 +1,7 @@
 package Contollers;
 
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.Set;
 
 /**
@@ -15,6 +16,7 @@ public class UsersController {
 
     private HashSet<Customer> customers;
     private HashSet<Manager> managers;
+    private Hashtable<String, String> logins;
     private Reader fileReader;
     private Writer fileWriter;
 
@@ -26,11 +28,18 @@ public class UsersController {
         customers = fileReader.readCustomer();
     }
 
+    public UsersController reloadUsersCont(){
+        return new UsersController();
+    }
+
+    public int getCustomerCount(){
+        return customers.size();
+    }
     //False: if customer already exists
     public boolean createNewCust(String n, String p, String a, String e){
-        boolean custE = customers.add(new Customer(n,p,a,e,customers.size()));
-
-
-        return custE;
+        boolean customerE = customers.add(new Customer(n,p,a,e,customers.size()));
+        fileWriter.writeCustomer(customers);
+        ourInstance = reloadUsersCont();
+        return customerE;
     }
 }

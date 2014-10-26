@@ -88,6 +88,14 @@ public class OrderController {
         return found;
     }
 
+    public double getOrderTotal(){
+        double total = 0.0;
+        for(MenuItem m: orderItems.keySet()){
+            total += m.getPrice() * orderItems.get(m);
+        }
+        return total;
+    }
+
     public boolean submitOrder(){
         return fileWriter.writeIncompleteOrders(orderItems);
     }
