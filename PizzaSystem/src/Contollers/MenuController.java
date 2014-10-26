@@ -34,14 +34,14 @@ public class MenuController {
 
     // Add item is clicked
     // Returns False: Item already exists
-    public boolean addItem(String n, double p, boolean isS){
-        return menuItems.add(new MenuItem(n,p,isS));
+    public boolean addItem(String n, double p, ItemType type){
+        return menuItems.add(new MenuItem(n,p,type));
     }
 
     // Remove item is clicked
     // Returns False: Item did not exist in set
-    public boolean removeItem(String n, double p, boolean isS){
-        MenuItem lookingFor = new MenuItem(n,p,isS);
+    public boolean removeItem(String n, double p, ItemType type){
+        MenuItem lookingFor = new MenuItem(n,p,type);
         for(MenuItem m : this.menuItems){
             if(m.equals(lookingFor)){
                 this.menuItems.remove(m);
@@ -59,8 +59,8 @@ public class MenuController {
 
     // Edit is pressed
     // Returns False: New item already exists
-    public boolean editItem(String oldName, String newName, double newP, boolean newSpecial){
-        MenuItem newMI = new MenuItem(newName, newP, newSpecial);
+    public boolean editItem(String oldName, String newName, double newP, ItemType type){
+        MenuItem newMI = new MenuItem(newName, newP, type);
 
         for(MenuItem mi: menuItems){
             if(oldName.equals(newMI.getName())){

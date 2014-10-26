@@ -14,6 +14,9 @@ public class UsersController {
         return ourInstance;
     }
 
+    private Set<Integer> ids;
+    private int maxID;
+
     private HashSet<Customer> customers;
     private HashSet<Manager> managers;
     private Hashtable<String, String> logins;
@@ -27,6 +30,27 @@ public class UsersController {
         fileWriter = new Writer();
         customers = fileReader.readCustomer();
         logins = fileReader.readLogin();
+        maxID = getMaxID();
+    }
+
+    private int getUniqueID(){
+        for(int i=0; i < maxID; i++){
+            if(!ids.contains(new Integer(i))){
+                return i;
+            }
+        }
+        return maxID + 1;
+    }
+
+    private int getMaxID(){
+        int max = 0;
+        for(Customer c: customers){
+            ids.add(c.getID());
+            if(c.getID() > max){
+                max = c.getID();
+            }
+        }
+        return max;
     }
 
     public UsersController reloadUsersCont(){
@@ -38,7 +62,7 @@ public class UsersController {
     }
     //False: if customer already exists
     public boolean createNewCust(String n, String p, String a, String e, String pass){
-        boolean customerE = customers.add(new Customer(n,p,a,e,customers.size()));
+        boolean customerE = customers.add(new Customer(n,p,a,e,getUniqueID()));
         fileWriter.writeCustomer(customers);
         logins.put(n,pass);
         fileWriter.writeLogin(logins);

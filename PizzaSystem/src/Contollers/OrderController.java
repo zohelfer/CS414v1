@@ -31,8 +31,8 @@ public class OrderController {
         return orderItems;
     }
     // Returns the size of the order (# items)
-    public int addToOrder(String n, double p, boolean isS){
-        MenuItem adding = new MenuItem(n,p,isS);
+    public int addToOrder(String n, double p, ItemType type){
+        MenuItem adding = new MenuItem(n,p,type);
         int oldQuantity = 0;
         for(MenuItem m: orderItems.keySet()){
             if(m.equals(adding)){
@@ -46,8 +46,8 @@ public class OrderController {
     }
 
     // Return: -1 if item not found
-    public int getQuantity(String n, double p, boolean isS){
-        MenuItem looking = new MenuItem(n,p,isS);
+    public int getQuantity(String n, double p, ItemType type){
+        MenuItem looking = new MenuItem(n,p,type);
         int quantity = -1;
         for(MenuItem m: orderItems.keySet()){
             if(m.equals(looking)){
@@ -59,8 +59,8 @@ public class OrderController {
     }
 
     // -1 if item not found
-    public int removeSingleItemFromOrder(String n, double p, boolean isS){
-        MenuItem removing = new MenuItem(n,p,isS);
+    public int removeSingleItemFromOrder(String n, double p, ItemType type){
+        MenuItem removing = new MenuItem(n,p,type);
         int newQuantity = -1;
         for(MenuItem m: orderItems.keySet()){
             if(m.equals(removing)){
@@ -75,9 +75,9 @@ public class OrderController {
     }
 
     // Return: False - item not found
-    public boolean removeAllMatchingItems(String n, double p, boolean isS){
+    public boolean removeAllMatchingItems(String n, double p, ItemType type){
         boolean found = false;
-        MenuItem removing = new MenuItem(n,p,isS);
+        MenuItem removing = new MenuItem(n,p,type);
         for(MenuItem m: orderItems.keySet()){
             if(m.equals(removing)){
                 orderItems.remove(m);
