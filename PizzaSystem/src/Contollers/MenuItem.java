@@ -40,8 +40,8 @@ public class MenuItem {
         return itemtype.name();
     }
 
-    public void makeSpecial() {
-        this.itemtype = ItemType.SPECIAL;
+    public void changeType(ItemType aType) {
+        itemtype = aType;
     }
 
     public boolean equals(Object o){
