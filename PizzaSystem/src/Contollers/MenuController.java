@@ -38,7 +38,14 @@ public class MenuController {
     // Add item is clicked
     // Returns False: Item already exists
     public boolean addItem(String n, double p, ItemType type){
-        return menuItems.add(new MenuItem(n,p,type));
+        MenuItem newMi = new MenuItem(n,p,type);
+        for(MenuItem m : menuItems){
+            if(m.equals(newMi)){
+                return false;
+            }
+        }
+        menuItems.add(newMi);
+        return true;
     }
 
     // Remove item is clicked

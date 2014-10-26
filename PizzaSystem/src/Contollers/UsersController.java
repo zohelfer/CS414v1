@@ -34,7 +34,7 @@ public class UsersController {
     }
 
     public void resetInstance(){
-
+        ourInstance = new UsersController();
     }
 
     private int getUniqueID(){
