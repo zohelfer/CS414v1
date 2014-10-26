@@ -58,20 +58,37 @@ public class OrderController {
         return quantity;
     }
 
-    // -1 if item not found
-    public int removeSingleItemFromOrder(String n, double p, ItemType type){
-        MenuItem removing = new MenuItem(n,p,type);
-        int newQuantity = -1;
-        for(MenuItem m: orderItems.keySet()){
-            if(m.equals(removing)){
-                int oldQuantity = orderItems.get(m);
+    public boolean completeItem(String n, double p, ItemType type) {
+        MenuItem removing = new MenuItem(n, p, type);
+        for(MenuItem m: orderItems.keySet()) {
+            if(m.equals(removing)) {
+                int oldQ = orderItems.get(m);
                 orderItems.remove(m);
-                orderItems.put(removing, oldQuantity -1);
-                newQuantity = orderItems.get(removing);
-                break;
+                if(oldQ > 1) {
+                    orderItems.put(removing, oldQ - 1);
+                }
+                fileWriter.writeIncompleteOrders(orderItems);
+                return true;
             }
         }
-        return newQuantity;
+        return false;
+    }
+
+    public boolean sendBackToKitchen(String n, double p, ItemType type) {
+        MenuItem sending = new MenuItem(n, p, type);
+        for(MenuItem m: orderItems.keySet()) {
+            if(m.equals(sending)) {
+                int oldQ = orderItems.get(m);
+                orderItems.remove(m);
+                orderItems.put(sending, oldQ + 1);
+
+                fileWriter.writeIncompleteOrders(orderItems);
+                return true;
+            }
+        }
+        orderItems.put(sending, 1);
+        fileWriter.writeIncompleteOrders(orderItems);
+        return false;
     }
 
     // Return: False - item not found
