@@ -14,7 +14,7 @@ public class UsersController {
         return ourInstance;
     }
 
-    private Set<Integer> ids;
+    private HashSet<Integer> ids;
     private int maxID;
 
     private HashSet<Customer> customers;
@@ -29,7 +29,9 @@ public class UsersController {
         fileReader = new Reader();
         fileWriter = new Writer();
         customers = fileReader.readCustomer();
+        ids = new HashSet<Integer>();
         logins = fileReader.readLogin();
+        maxID = 0;
         maxID = getMaxID();
     }
 
