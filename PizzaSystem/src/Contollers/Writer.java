@@ -22,7 +22,7 @@ public class Writer {
                         splitDelimiter +
                         item.getPrice() +
                         splitDelimiter +
-                        item.isSpecial());
+                        item.getTypeString());
 			}
 			pw.close();
             wroteSuccess = true;
@@ -43,7 +43,7 @@ public class Writer {
 
                 for(MenuItem i : m) {
                     pw.println(i.getName() + splitDelimiter +
-                            i.getPrice() + splitDelimiter + i.isSpecial());
+                            i.getPrice() + splitDelimiter + i.getTypeString());
                 }
             }
             pw.close();
@@ -94,6 +94,32 @@ public class Writer {
         }
         catch(IOException ioE){
             System.out.println("Problem writing customers file");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean writeLogin(Hashtable<String, String> logins){
+        try{
+            File f = new File(FileName.LOGIN.name());
+            if(!f.exists()){
+                f.createNewFile();
+            }
+            // is it this easy? lol
+            synchronized(f){
+                BufferedWriter bfw = new BufferedWriter(new FileWriter(f));
+                for(String customer : logins.keySet()){
+                    String password = logins.get(customer) ;
+                    bfw.write(customer+ splitDelimiter, 0, customer.length()+1);
+                    bfw.write(password,0,password.length());
+                    bfw.newLine();
+                }
+                bfw.close();
+            }
+        }
+        catch(IOException ioE){
+            System.out.println("Problem writing INCOMPLETE file");
+            ioE.printStackTrace();
             return false;
         }
         return true;

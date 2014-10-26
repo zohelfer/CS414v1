@@ -21,7 +21,9 @@ public class Reader {
 			while(scan.hasNextLine()) {
              String[] line = scan.nextLine().split(spaceDelimiter);
              if(line.length > 1) {
-                 mi = new MenuItem(line[0], Double.parseDouble(line[1]), Boolean.parseBoolean(line[2]));
+                 mi = new MenuItem(line[0],
+                         Double.parseDouble(line[1]),
+                         ItemType.valueOf(line[2]));
                  m.add(mi);
              }
             }
@@ -49,7 +51,7 @@ public class Reader {
                         String[] item = scan.nextLine().split(spaceDelimiter);
                         MenuItem mi = new MenuItem(item[0],
                                 Double.parseDouble(item[1]),
-                                Boolean.parseBoolean(item[2]));
+                                ItemType.valueOf(item[2]));
                         items.add(mi);
                     }
                     order = new Order(items, Integer.parseInt(info[0]),
@@ -82,7 +84,7 @@ public class Reader {
                     MenuItem m = new MenuItem(
                             allLines[1],
                             Double.parseDouble(allLines[2]),
-                            Boolean.parseBoolean(allLines[3]));
+                            ItemType.valueOf(allLines[3]));
 
                     incompleteOrders.put(m, quantity);
                 }

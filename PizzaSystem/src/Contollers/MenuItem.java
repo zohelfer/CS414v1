@@ -9,12 +9,12 @@ public class MenuItem {
 
     private String name;
     private double price;
-    private boolean isSpecial;
+    private ItemType itemtype;
 
-    public MenuItem(String name, double price, boolean isSpecial) {
+    public MenuItem(String name, double price, ItemType type) {
         this.name = name;
         this.price = price;
-        this.isSpecial = isSpecial;
+        this.itemtype = type;
     }
 
     public String getName() {
@@ -33,12 +33,15 @@ public class MenuItem {
         this.price = price;
     }
 
-    public boolean isSpecial() {
-        return isSpecial;
+    public ItemType getType() {
+        return itemtype;
+    }
+    public String getTypeString(){
+        return itemtype.name();
     }
 
     public void makeSpecial() {
-        this.isSpecial = true;
+        this.itemtype = ItemType.SPECIAL;
     }
 
     public boolean equals(Object o){
@@ -50,6 +53,6 @@ public class MenuItem {
     }
 
     public String toString(){
-        return this.name + " " + this.price + " " + this.isSpecial;
+        return this.name + " " + this.price + " " + this.itemtype.name();
     }
 }

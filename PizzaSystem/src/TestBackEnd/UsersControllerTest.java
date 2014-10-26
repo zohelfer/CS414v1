@@ -22,7 +22,7 @@ public class UsersControllerTest {
     @Test
     public void testCreateNewCust() throws Exception {
         int initS = uc.getCustomerCount();
-        uc.createNewCust("Yab","222", "My home", "myemail@email.com");
+        uc.createNewCust("Yab","222", "My home", "myemail@email.com", "Password");
         assertEquals(initS +1 , uc.getCustomerCount());
     }
 }

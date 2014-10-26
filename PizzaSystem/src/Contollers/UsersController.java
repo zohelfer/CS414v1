@@ -26,6 +26,7 @@ public class UsersController {
         fileReader = new Reader();
         fileWriter = new Writer();
         customers = fileReader.readCustomer();
+        logins = fileReader.readLogin();
     }
 
     public UsersController reloadUsersCont(){
@@ -36,9 +37,11 @@ public class UsersController {
         return customers.size();
     }
     //False: if customer already exists
-    public boolean createNewCust(String n, String p, String a, String e){
+    public boolean createNewCust(String n, String p, String a, String e, String pass){
         boolean customerE = customers.add(new Customer(n,p,a,e,customers.size()));
         fileWriter.writeCustomer(customers);
+        logins.put(n,pass);
+        fileWriter.writeLogin(logins);
         ourInstance = reloadUsersCont();
         return customerE;
     }
