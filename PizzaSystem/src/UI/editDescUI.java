@@ -31,11 +31,13 @@ public class editDescUI extends javax.swing.JFrame {
         editItem = ei;
         this.nameTextField.setText(item.getName());
         this.priceTextField.setText(String.valueOf(item.getPrice()));
-        add = false;
-    }
-    public editDescUI(editItemUI ei) {
-        editItem = ei;
-        initComponents();
+        if(item.getName().equals(""))
+        {
+            add= true;
+        }
+        else {
+            add = false;
+        }
     }
 
     /**

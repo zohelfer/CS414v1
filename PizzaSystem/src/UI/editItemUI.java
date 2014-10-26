@@ -5,6 +5,7 @@
  */
 package UI;
 
+import Contollers.ItemType;
 import Contollers.MenuController;
 import Contollers.MenuItem;
 
@@ -33,7 +34,12 @@ public class editItemUI extends javax.swing.JFrame {
         initComponents();
         menu = mm;
         for (MenuItem m : MenuController.getInstance().loadMenu()) {
-            pizzas.addElement(m.getName());
+            if(m.getType().equals(ItemType.PIZZA))
+                pizzas.addElement(m.getName());
+            else if (m.getType().equals(ItemType.DRINK))
+                drinks.addElement(m.getName());
+            else if (m.getType().equals(ItemType.SPECIAL))
+                specials.addElement(m.getName());
         }
     }
 
@@ -375,8 +381,16 @@ public class editItemUI extends javax.swing.JFrame {
 
     public void updateLists() {
         pizzas.clear();
+        drinks.clear();
+        specials.clear();
+
         for (MenuItem m : MenuController.getInstance().loadMenu()) {
-            pizzas.addElement(m.getName());
+            if(m.getType().equals(ItemType.PIZZA))
+                pizzas.addElement(m.getName());
+            else if (m.getType().equals(ItemType.DRINK))
+                drinks.addElement(m.getName());
+            else if (m.getType().equals(ItemType.SPECIAL))
+                specials.addElement(m.getName());
         }
     }
 
@@ -389,7 +403,7 @@ public class editItemUI extends javax.swing.JFrame {
 
     private void addPizzaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPizzaButtonActionPerformed
         // TODO add your handling code here:
-        new editDescUI(this).setVisible(true);
+        new editDescUI(new MenuItem("",0.00,ItemType.PIZZA),this).setVisible(true);
     }//GEN-LAST:event_addPizzaButtonActionPerformed
 
     private void removePizzaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePizzaButtonActionPerformed
@@ -415,28 +429,52 @@ public class editItemUI extends javax.swing.JFrame {
 
     private void addDrinkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDrinkButtonActionPerformed
         // TODO add your handling code here:
-        new editDescUI(this).setVisible(true);
+        new editDescUI(new MenuItem("",0.00,ItemType.DRINK),this).setVisible(true);
     }//GEN-LAST:event_addDrinkButtonActionPerformed
 
     private void removeDrinkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeDrinkButtonActionPerformed
         // TODO add your handling code here:
+        int size = MenuController.getInstance().loadMenu().size();
+        MenuItem[] conv = new MenuItem[size];
+        MenuController.getInstance().loadMenu().toArray(conv);
+        MenuItem sel = conv[drinkList.getSelectedIndex()];
+        MenuController.getInstance().removeItem(sel.getName(), sel.getPrice(), sel.getType());
+        updateLists();
     }//GEN-LAST:event_removeDrinkButtonActionPerformed
 
     private void editDrinkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editDrinkButtonActionPerformed
         // TODO add your handling code here:
+        int size = MenuController.getInstance().loadMenu().size();
+        MenuItem[] conv = new MenuItem[size];
+        MenuController.getInstance().loadMenu().toArray(conv);
+        MenuItem sel = conv[drinkList.getSelectedIndex()];
+        editDescUI edit = new editDescUI(sel, this);
+        edit.setVisible(true);
     }//GEN-LAST:event_editDrinkButtonActionPerformed
 
     private void addSpecialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSpecialButtonActionPerformed
         // TODO add your handling code here:
-        new editDescUI(this).setVisible(true);
+        new editDescUI(new MenuItem("",0.00,ItemType.SPECIAL),this).setVisible(true);
     }//GEN-LAST:event_addSpecialButtonActionPerformed
 
     private void removeSpecialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSpecialButtonActionPerformed
         // TODO add your handling code here:
+        int size = MenuController.getInstance().loadMenu().size();
+        MenuItem[] conv = new MenuItem[size];
+        MenuController.getInstance().loadMenu().toArray(conv);
+        MenuItem sel = conv[SpecialList.getSelectedIndex()];
+        MenuController.getInstance().removeItem(sel.getName(), sel.getPrice(), sel.getType());
+        updateLists();
     }//GEN-LAST:event_removeSpecialButtonActionPerformed
 
     private void editSpecialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSpecialButtonActionPerformed
         // TODO add your handling code here:
+        int size = MenuController.getInstance().loadMenu().size();
+        MenuItem[] conv = new MenuItem[size];
+        MenuController.getInstance().loadMenu().toArray(conv);
+        MenuItem sel = conv[SpecialList.getSelectedIndex()];
+        editDescUI edit = new editDescUI(sel, this);
+        edit.setVisible(true);
     }//GEN-LAST:event_editSpecialButtonActionPerformed
 
     private void addCouponButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCouponButtonActionPerformed

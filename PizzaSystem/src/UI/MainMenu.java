@@ -128,12 +128,11 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
-        this.setResizable(true);
+        setResizable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 50, 0, 0));
         setMinimumSize(new java.awt.Dimension(750, 750));
         setPreferredSize(new java.awt.Dimension(750, 750));
-        setResizable(false);
         getContentPane().setLayout(new java.awt.BorderLayout(50, 50));
 
         jPanel5.setPreferredSize(new java.awt.Dimension(750, 770));
