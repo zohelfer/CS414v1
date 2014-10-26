@@ -6,6 +6,7 @@
 package UI;
 
 
+import Contollers.ItemType;
 import Contollers.MenuItem;
 import Contollers.OrderController;
 
@@ -34,24 +35,25 @@ public class chefUI extends javax.swing.JFrame {
     {
         public void run()
         {
-            System.out.println("TEST");
+            System.out.println("Refreshing list");
         }
 
     }
     public chefUI() {
 
         oc = OrderController.getInstance();
+
+        //Populate list
+        incompleteList = new DefaultListModel();
         Hashtable<MenuItem, Integer> incompleteItems = oc.getIncompleteItems();
         for(MenuItem m : incompleteItems.keySet()){
             for(int j = 0; j < incompleteItems.get(m) ; j++){
-                incompleteList.addElement(m.getName());
+                incompleteList.addElement(m.toString());
             }
         }
-
-        timer = new Timer();
-
         initComponents();
-        timer.schedule(new UpdateUI(),0,5000);
+        timer = new Timer();
+        //timer.schedule(new UpdateUI(),0,5000);
 
     }
 
@@ -155,6 +157,15 @@ public class chefUI extends javax.swing.JFrame {
 
     private void orderCompleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderCompleteButtonActionPerformed
         // TODO add your handling code here:
+        int removedIndex = jList1.getSelectedIndex();
+
+        if( removedIndex > -1){
+            String sel = incompleteList.elementAt(removedIndex).toString();
+            String[] token = sel.split(" ");
+            oc.completeItem(token[0], Double.parseDouble(token[1]), ItemType.valueOf(token[2]));
+            incompleteList.remove(removedIndex);
+            jList1 = new JList(incompleteList);
+        }
     }//GEN-LAST:event_orderCompleteButtonActionPerformed
 
 
