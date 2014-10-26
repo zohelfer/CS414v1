@@ -11,7 +11,7 @@ public class MenuItem {
     private double price;
     private ItemType itemtype;
 
-    private String starDelim = "~";
+    private String starDelim = " ";
 
     public MenuItem(String name, double price, ItemType type) {
         this.name = name;
