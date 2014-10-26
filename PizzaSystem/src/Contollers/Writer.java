@@ -1,10 +1,11 @@
 package Contollers;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import TempPackage.Order;
+
+import java.io.*;
 import java.util.ArrayList;
 
+import java.util.Hashtable;
 import java.util.Set;
 
 public class Writer {
@@ -12,7 +13,7 @@ public class Writer {
 	public boolean writeMenu(Set<MenuItem> m) {
         boolean wroteSuccess;
 		try {
-			PrintWriter pw = new PrintWriter(new File("MENU"));
+			PrintWriter pw = new PrintWriter(new File(FileName.MENU.name()));
 			for(MenuItem item : m) {
 				pw.println(item.getName() + " " + item.getPrice() + " " + item.isSpecial());
 			}
@@ -24,7 +25,7 @@ public class Writer {
 	}
     public void writeOrders(ArrayList<Order> order) {
         try {
-            PrintWriter pw = new PrintWriter(new File("ORDERS"));
+            PrintWriter pw = new PrintWriter(new File(FileName.ORDER.name()));
             ArrayList<MenuItem> m = new ArrayList<MenuItem>();;
             for(Order o : order) {
                 m = o.getOrderList();
@@ -36,6 +37,34 @@ public class Writer {
             pw.close();
         } catch(FileNotFoundException e) { }
     }
+
+    public boolean writeIncompleteOrders(Hashtable<MenuItem, Integer> orderItems){
+        try{
+            File f = new File(FileName.INCOMPLETE.name());
+            if(!f.exists()){
+                f.createNewFile();
+                return false;
+            }
+            // is it this easy? lol
+            synchronized(f){
+                BufferedWriter bfw = new BufferedWriter(new FileWriter(f));
+                for(MenuItem m : orderItems.keySet()){
+                    String quantity = String.valueOf(orderItems.get(m)) + " ";
+                    bfw.write(quantity, 0, quantity.length());
+                    bfw.write(m.toString(),0,m.toString().length());
+                    bfw.newLine();
+                }
+                bfw.close();
+            }
+        }
+        catch(IOException ioE){
+            System.out.println("Problem writing INCOMPLETE file");
+            ioE.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
 /*
     public static void main(String[] args) {
         Writer w = new Writer();

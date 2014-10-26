@@ -67,4 +67,12 @@ public class OrderControllerTest {
         oc.resetInstance();
     }
 
+    @Test
+    public void testSubmitOrder() throws Exception {
+        testAdd(20);
+        oc.addToOrder("Another", 2332.0, false);
+        assertTrue(oc.submitOrder());
+        oc.resetInstance();
+    }
+
 }

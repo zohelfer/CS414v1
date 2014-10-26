@@ -50,6 +50,6 @@ public class MenuItem {
     }
 
     public String toString(){
-        return "MenuItem: " + this.name + " " + this.price + " " + this.isSpecial;
+        return this.name + " " + this.price + " " + this.isSpecial;
     }
 }

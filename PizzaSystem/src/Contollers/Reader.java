@@ -1,18 +1,20 @@
 package Contollers;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Set;
+import TempPackage.Order;
+
+import java.io.*;
 import java.util.HashSet;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Scanner;
 
 public class Reader {
-	public HashSet<MenuItem> readMenu() {
+
+    public HashSet<MenuItem> readMenu() {
 		HashSet<MenuItem> m = new HashSet<MenuItem>();
 		MenuItem mi;
 		try {
-			Scanner scan = new Scanner(new File("MENU"));
+			Scanner scan = new Scanner(new File(FileName.MENU.name()));
 			while(scan.hasNextLine()) {
              String[] line = scan.nextLine().split(" ");
              if(line.length > 1) {
@@ -35,7 +37,7 @@ public class Reader {
 		double amountDue;
 		boolean isComplete;
 		try {
-			Scanner scan = new Scanner(new File("ORDERS"));
+			Scanner scan = new Scanner(new File(FileName.ORDER.name()));
             ArrayList<MenuItem> items = new ArrayList<MenuItem>();
 			while(scan.hasNextLine()) {
                 String[] info = scan.nextLine().split(" ");
@@ -56,6 +58,30 @@ public class Reader {
 		}
 		return o;
 	}
+
+    public Hashtable<MenuItem, Integer> readIncomplete(){
+        Hashtable<MenuItem, Integer> incompleteOrders = new Hashtable<MenuItem, Integer>();
+        try{
+            File f = new File(FileName.INCOMPLETE.name());
+            if(!f.exists()){
+                f.createNewFile();
+                return incompleteOrders;
+            }
+            synchronized (f){
+                BufferedReader bfr = new BufferedReader(new FileReader(f));
+                String line;
+                while((line = bfr.readLine()) != null){
+                    //FINISH ME!
+                    //String[] allLines =
+                }
+            }
+        }
+        catch(IOException ioE){
+            System.err.print("Error with " + FileName.INCOMPLETE.name());
+            return new Hashtable<MenuItem, Integer>();
+        }
+        return incompleteOrders;
+    }
     /*
     public static void main(String[]args ) {
        Reader r = new Reader();
