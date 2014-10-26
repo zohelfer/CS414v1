@@ -1,7 +1,5 @@
 package Contollers;
 
-import TempPackage.User;
-
 /**
  * Created by Nik on 10/2/14.
  */

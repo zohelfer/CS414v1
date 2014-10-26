@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Reader {
 
     private String spaceDelimiter = " ";
-    private String starDelimiter = "*";
+    private String starDelimiter = "~";
 
     public HashSet<MenuItem> readMenu() {
 		HashSet<MenuItem> m = new HashSet<MenuItem>();

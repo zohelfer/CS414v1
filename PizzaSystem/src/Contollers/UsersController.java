@@ -26,11 +26,18 @@ public class UsersController {
         customers = fileReader.readCustomer();
     }
 
+    public UsersController reloadUsersCont(){
+        return new UsersController();
+    }
+
+    public int getCustomerCount(){
+        return customers.size();
+    }
     //False: if customer already exists
     public boolean createNewCust(String n, String p, String a, String e){
-        boolean custE = customers.add(new Customer(n,p,a,e,customers.size()));
-
-
-        return custE;
+        boolean customerE = customers.add(new Customer(n,p,a,e,customers.size()));
+        fileWriter.writeCustomer(customers);
+        ourInstance = reloadUsersCont();
+        return customerE;
     }
 }
