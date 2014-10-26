@@ -8,6 +8,8 @@ public class Manager implements User {
     String name;
     private int empID;
 
+    private String starDelim = "~";
+
     public Manager(String name, int empID) {
         this.name = name;
         this.empID = empID;
@@ -26,6 +28,6 @@ public class Manager implements User {
     }
 
     public String toString(){
-        return "Manager " + empID + ": " + name;
+        return name + starDelim + empID;
     }
 }

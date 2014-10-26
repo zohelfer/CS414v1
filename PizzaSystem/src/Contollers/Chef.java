@@ -8,6 +8,8 @@ public class Chef implements User {
     private String name;
     private int empID;
 
+    private String starDelim = "~";
+
     public Chef(String name, int empID) {
         this.name = name;
         this.empID = empID;
@@ -17,9 +19,13 @@ public class Chef implements User {
 
     public String getName(){ return name; }
 
-    public void setName(String name){ this.name = name; }
+    public void setName(String name) {
+        if(name != null) {
+            this.name = name;
+        }
+    }
 
-    public String toString(){ return "Chef " + empID + ": " + name; }
+    public String toString(){ return name + starDelim + empID; }
 }
 
 
