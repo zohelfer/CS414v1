@@ -11,30 +11,9 @@ import static junit.framework.Assert.*;
  */
 public class MenuItemTest {
     @Test
-    public void testGetName() throws Exception {
-
-    }
-
-    @Test
-    public void testSetName() throws Exception {
-
-    }
-
-    @Test
-    public void testGetPrice() throws Exception {
-
-    }
-
-    @Test
-    public void testSetPrice() throws Exception {
-
-    }
-
-    @Test
     public void testIsSpecial1() throws Exception {
         MenuItem anItem = new MenuItem("Pizza", 6.5, ItemType.SPECIAL);
         assertEquals(ItemType.SPECIAL, anItem.getType());
-
     }
 
     @Test
@@ -44,7 +23,36 @@ public class MenuItemTest {
     }
 
     @Test
-    public void testChangeType() throws Exception {
+    public void testChangeType1() throws Exception {
+        MenuItem anItem = new MenuItem("Pizza", 6.5, ItemType.PIZZA);
+        anItem.changeType(ItemType.SPECIAL);
+        assertEquals(ItemType.SPECIAL, anItem.getType());
+    }
 
+    @Test
+    public void testChangeType2() throws Exception {
+        MenuItem anItem = new MenuItem("Pizza", 6.5, ItemType.SPECIAL);
+        anItem.changeType(ItemType.PIZZA);
+        assertEquals(ItemType.PIZZA, anItem.getType());
+    }
+
+    @Test
+    public void testEquals1() throws Exception {
+        MenuItem anItem = new MenuItem("Pizza", 6.5, ItemType.SPECIAL);
+        MenuItem anItem2 = new MenuItem("Pizza", 6.5, ItemType.SPECIAL);
+        assertEquals(true, anItem.equals(anItem2));
+    }
+
+    @Test
+    public void testEquals2() throws Exception {
+        MenuItem anItem = new MenuItem("Pizza", 6.5, ItemType.SPECIAL);
+        MenuItem anItem2 = new MenuItem("Pasta", 6.5, ItemType.SPECIAL);
+        assertEquals(false, anItem.equals(anItem2));
+    }
+
+    @Test
+    public void testToString() throws Exception {
+        MenuItem anItem = new MenuItem("Pizza", 6.5, ItemType.SPECIAL);
+        assertEquals("Pizza~6.5~SPECIAL", anItem.toString());
     }
 }
