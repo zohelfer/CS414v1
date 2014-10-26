@@ -10,13 +10,15 @@ import java.util.Scanner;
 
 public class Reader {
 
+    private String splitDelimiter = " ";
+
     public HashSet<MenuItem> readMenu() {
 		HashSet<MenuItem> m = new HashSet<MenuItem>();
 		MenuItem mi;
 		try {
 			Scanner scan = new Scanner(new File(FileName.MENU.name()));
 			while(scan.hasNextLine()) {
-             String[] line = scan.nextLine().split(" ");
+             String[] line = scan.nextLine().split(splitDelimiter);
              if(line.length > 1) {
                  mi = new MenuItem(line[0], Double.parseDouble(line[1]), Boolean.parseBoolean(line[2]));
                  m.add(mi);
@@ -40,14 +42,18 @@ public class Reader {
 			Scanner scan = new Scanner(new File(FileName.ORDER.name()));
             ArrayList<MenuItem> items = new ArrayList<MenuItem>();
 			while(scan.hasNextLine()) {
-                String[] info = scan.nextLine().split(" ");
+                String[] info = scan.nextLine().split(splitDelimiter);
                 if(info.length > 1) {
                     for (int i = 0; i < Integer.parseInt(info[3]); i++) {
-                        String[] item = scan.nextLine().split(" ");
-                        MenuItem mi = new MenuItem(item[0], Double.parseDouble(item[1]), Boolean.parseBoolean(item[2]));
+                        String[] item = scan.nextLine().split(splitDelimiter);
+                        MenuItem mi = new MenuItem(item[0],
+                                Double.parseDouble(item[1]),
+                                Boolean.parseBoolean(item[2]));
                         items.add(mi);
                     }
-                    order = new Order(items, Integer.parseInt(info[0]), Double.parseDouble(info[1]), Boolean.parseBoolean(info[2]));
+                    order = new Order(items, Integer.parseInt(info[0]),
+                            Double.parseDouble(info[1]),
+                            Boolean.parseBoolean(info[2]));
                     o.add(order);
                 }
 			}
@@ -71,8 +77,14 @@ public class Reader {
                 BufferedReader bfr = new BufferedReader(new FileReader(f));
                 String line;
                 while((line = bfr.readLine()) != null){
-                    //FINISH ME!
-                    //String[] allLines =
+                    String[] allLines = line.split(splitDelimiter);
+                    Integer quantity = new Integer(allLines[0]);
+                    MenuItem m = new MenuItem(
+                            allLines[1],
+                            Double.parseDouble(allLines[2]),
+                            Boolean.parseBoolean(allLines[3]));
+
+                    incompleteOrders.put(m,quantity);
                 }
             }
         }

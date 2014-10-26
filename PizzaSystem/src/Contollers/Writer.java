@@ -10,12 +10,18 @@ import java.util.Set;
 
 public class Writer {
 
+    private String splitDelimiter = " ";
+
 	public boolean writeMenu(Set<MenuItem> m) {
         boolean wroteSuccess;
 		try {
 			PrintWriter pw = new PrintWriter(new File(FileName.MENU.name()));
 			for(MenuItem item : m) {
-				pw.println(item.getName() + " " + item.getPrice() + " " + item.isSpecial());
+				pw.println(item.getName() +
+                        splitDelimiter +
+                        item.getPrice() +
+                        splitDelimiter +
+                        item.isSpecial());
 			}
 			pw.close();
             wroteSuccess = true;
@@ -26,12 +32,16 @@ public class Writer {
     public void writeOrders(ArrayList<Order> order) {
         try {
             PrintWriter pw = new PrintWriter(new File(FileName.ORDER.name()));
-            ArrayList<MenuItem> m = new ArrayList<MenuItem>();;
+            ArrayList<MenuItem> m = new ArrayList<MenuItem>();
             for(Order o : order) {
                 m = o.getOrderList();
-                pw.println(o.getOrderNumber() + " " + o.getAmountDue() + " " + o.isComplete() + " " + m.size());
+                pw.println(o.getOrderNumber() + splitDelimiter +
+                        o.getAmountDue() + splitDelimiter +
+                        o.isComplete() + splitDelimiter + m.size());
+
                 for(MenuItem i : m) {
-                    pw.println(i.getName() + " " + i.getPrice() + " " + i.isSpecial());
+                    pw.println(i.getName() + splitDelimiter +
+                            i.getPrice() + splitDelimiter + i.isSpecial());
                 }
             }
             pw.close();
@@ -49,7 +59,7 @@ public class Writer {
             synchronized(f){
                 BufferedWriter bfw = new BufferedWriter(new FileWriter(f));
                 for(MenuItem m : orderItems.keySet()){
-                    String quantity = String.valueOf(orderItems.get(m)) + " ";
+                    String quantity = String.valueOf(orderItems.get(m)) + splitDelimiter;
                     bfw.write(quantity, 0, quantity.length());
                     bfw.write(m.toString(),0,m.toString().length());
                     bfw.newLine();
