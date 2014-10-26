@@ -48,7 +48,11 @@ public class MenuControllerTest {
 
     @Test
     public void testSaveMenu() throws Exception {
-
+        HashSet<MenuItem> initSet = mc.loadMenu();
+        mc.addItem("Pepperoni", 3.5, ItemType.PIZZA);
+        mc.saveMenu();
+        HashSet<MenuItem> newSet = mc.freshMenu();
+        assertNotSame(initSet, newSet);
     }
 
     @Test

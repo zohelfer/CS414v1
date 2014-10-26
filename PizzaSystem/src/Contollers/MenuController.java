@@ -27,8 +27,11 @@ public class MenuController {
         menuItems = fileReader.readMenu();
     }
 
+    //Pretty much a "getMenu()"
+    public HashSet<MenuItem> freshMenu() { return fileReader.readMenu(); }
+
     // Called at the start of menu adding process
-    public Set<MenuItem> loadMenu(){
+    public HashSet<MenuItem> loadMenu(){
         return this.menuItems;
     }
 

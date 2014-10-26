@@ -13,7 +13,7 @@ public class Writer {
 
     private String splitDelimiter = " ";
 
-	public boolean writeMenu(Set<MenuItem> m) {
+	public boolean writeMenu(HashSet<MenuItem> m) {
         boolean wroteSuccess;
 		try {
 			PrintWriter pw = new PrintWriter(new File(FileName.MENU.name()));
