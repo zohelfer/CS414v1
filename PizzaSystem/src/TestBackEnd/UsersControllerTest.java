@@ -25,4 +25,9 @@ public class UsersControllerTest {
         uc.createNewCust("Yab","222", "My home", "myemail@email.com", "Password");
         assertEquals(initS +1 , uc.getCustomerCount());
     }
+
+    @Test
+    public void testgetCustomer(){
+
+    }
 }
