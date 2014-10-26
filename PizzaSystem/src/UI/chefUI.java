@@ -5,6 +5,9 @@
  */
 package UI;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  *
  * @author zacc
@@ -14,8 +17,20 @@ public class chefUI extends javax.swing.JFrame {
     /**
      * Creates new form chefUI
      */
+    private Timer timer;
+    private class UpdateUI extends TimerTask
+    {
+        public void run()
+        {
+            System.out.println("TEST");
+        }
+
+    }
     public chefUI() {
+        timer = new Timer();
         initComponents();
+        timer.schedule(new UpdateUI(),0,5000);
+
     }
 
     /**
