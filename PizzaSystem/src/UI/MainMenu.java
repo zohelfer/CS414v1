@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Set;
 import Contollers.MenuItem;
+import Contollers.OrderController;
 
 
 /**
@@ -377,13 +378,7 @@ public class MainMenu extends javax.swing.JFrame {
         int removeID = orderList.getSelectedIndex();
         if (removeID > -1)
         {
-            DefaultListModel orderModel = (DefaultListModel) orderList.getModel();
-            String s = orderModel.elementAt(removeID).toString();
-            String[] tokens = s.split("   ");
-            double price = Double.parseDouble(tokens[tokens.length-1]);
-            orderModel.remove(removeID);
 
-            updatePrice(price,false);
         }
     }//GEN-LAST:event_removeItemButtonActionPerformed
 

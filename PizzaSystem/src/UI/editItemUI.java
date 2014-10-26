@@ -5,8 +5,13 @@
  */
 package UI;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
+import Contollers.MenuController;
+import Contollers.MenuItem;
+
+import javax.swing.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,13 +22,17 @@ public class editItemUI extends javax.swing.JFrame {
     /**
      * Creates new form editItemUI
      */
-    private DefaultListModel pizzas;
-    private DefaultListModel drinks;
-    private DefaultListModel specials;
-    private DefaultListModel coupons;
+    private DefaultListModel pizzas = new DefaultListModel();
+    private DefaultListModel drinks = new DefaultListModel();
+    private DefaultListModel specials = new DefaultListModel();
+    private DefaultListModel coupons = new DefaultListModel();
     
     public editItemUI() {
         initComponents();
+        for (MenuItem m : MenuController.getInstance().loadMenu())
+        {
+            pizzas.addElement(m.getName());
+        }
     }
 
     /**
@@ -320,24 +329,49 @@ public class editItemUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void updateLists()
+    {
+        pizzas.clear();
+        for (MenuItem m : MenuController.getInstance().loadMenu()) {
+            pizzas.addElement(m.getName());
+        }
+    }
+
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
+        MenuController.getInstance().saveMenu();
+        this.dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void addPizzaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPizzaButtonActionPerformed
         // TODO add your handling code here:
+        new editDescUI(this).setVisible(true);
     }//GEN-LAST:event_addPizzaButtonActionPerformed
 
     private void removePizzaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePizzaButtonActionPerformed
         // TODO add your handling code here:
+        int size = MenuController.getInstance().loadMenu().size();
+        MenuItem[] conv = new MenuItem[size];
+        MenuController.getInstance().loadMenu().toArray(conv);
+        MenuItem sel = conv[pizzaList.getSelectedIndex()];
+        MenuController.getInstance().removeItem(sel.getName(),sel.getPrice(),sel.isSpecial());
+        updateLists();
     }//GEN-LAST:event_removePizzaButtonActionPerformed
 
     private void editPizzaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editPizzaButtonActionPerformed
         // TODO add your handling code here:
+        int size = MenuController.getInstance().loadMenu().size();
+        MenuItem[] conv = new MenuItem[size];
+        MenuController.getInstance().loadMenu().toArray(conv);
+        MenuItem sel = conv[pizzaList.getSelectedIndex()];
+        editDescUI edit = new editDescUI(sel,this);
+        edit.setVisible(true);
+
     }//GEN-LAST:event_editPizzaButtonActionPerformed
 
     private void addDrinkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDrinkButtonActionPerformed
         // TODO add your handling code here:
+        new editDescUI(this).setVisible(true);
     }//GEN-LAST:event_addDrinkButtonActionPerformed
 
     private void removeDrinkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeDrinkButtonActionPerformed
@@ -350,6 +384,7 @@ public class editItemUI extends javax.swing.JFrame {
 
     private void addSpecialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSpecialButtonActionPerformed
         // TODO add your handling code here:
+        new editDescUI(this).setVisible(true);
     }//GEN-LAST:event_addSpecialButtonActionPerformed
 
     private void removeSpecialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeSpecialButtonActionPerformed

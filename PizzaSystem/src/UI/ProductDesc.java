@@ -185,12 +185,12 @@ public class ProductDesc extends javax.swing.JFrame {
     }//GEN-LAST:event_qtyComboBoxActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        // TODO add your handling code here:
-        editDescUI edUI = new editDescUI(this);
-        edUI.setDescTextArea(this.descTextArea.getText());
-        edUI.setPriceTextField(this.priceLabel.getText());
-        edUI.setNameTextField(this.pizzaNameLabel.getText());
-        edUI.setVisible(true);
+//        // TODO add your handling code here:
+//        editDescUI edUI = new editDescUI();
+//        edUI.setDescTextArea(this.descTextArea.getText());
+//        edUI.setPriceTextField(this.priceLabel.getText());
+//        edUI.setNameTextField(this.pizzaNameLabel.getText());
+//        edUI.setVisible(true);
         
         
     }//GEN-LAST:event_editButtonActionPerformed

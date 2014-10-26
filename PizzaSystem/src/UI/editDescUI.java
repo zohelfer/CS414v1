@@ -5,6 +5,9 @@
  */
 package UI;
 
+import Contollers.MenuController;
+import Contollers.MenuItem;
+
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -17,10 +20,22 @@ public class editDescUI extends javax.swing.JFrame {
     /**
      * Creates new form editDescUI
      */
-    private ProductDesc prodDesc;
-    public editDescUI(ProductDesc productDesc) {
+
+    private MenuItem item;
+    private boolean add = true;
+    private editItemUI editItem;
+
+    public editDescUI(MenuItem mi, editItemUI ei) {
         initComponents();
-        prodDesc = productDesc;
+        item = mi;
+        editItem = ei;
+        this.nameTextField.setText(item.getName());
+        this.priceTextField.setText(String.valueOf(item.getPrice()));
+        add = false;
+    }
+    public editDescUI(editItemUI ei) {
+        editItem = ei;
+        initComponents();
     }
 
     /**
@@ -112,10 +127,20 @@ public class editDescUI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        prodDesc.setDescTextArea(this.descTextArea.getText());
-        prodDesc.setPizzaNameLabel(this.nameTextField.getText());
-        prodDesc.setPriceLabel(this.priceTextField.getText());
-        this.setVisible(false);
+        //Double.parseDouble(priceTextField.getText());
+
+        if(add)
+        {
+            MenuController.getInstance().addItem(nameTextField.getText(),Double.parseDouble(priceTextField.getText()),false);
+            editItem.updateLists();
+        }
+        else
+        {
+            MenuController.getInstance().editItem(item.getName(),nameTextField.getText(),Double.parseDouble(priceTextField.getText()),false);
+            editItem.updateLists();
+        }
+
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
