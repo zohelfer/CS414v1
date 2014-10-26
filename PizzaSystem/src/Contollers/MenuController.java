@@ -63,15 +63,17 @@ public class MenuController {
     // Edit is pressed
     // Returns False: New item already exists
     public boolean editItem(String oldName, String newName, double newP, ItemType type){
-        MenuItem newMI = new MenuItem(newName, newP, type);
-
+        boolean found = false;
         for(MenuItem mi: menuItems){
-            if(oldName.equals(newMI.getName())){
-                menuItems.remove(mi);
-                return menuItems.add(newMI);
+            if(oldName.equals(mi.getName())){
+                mi.setName(newName);
+                mi.setPrice(newP);
+                mi.changeType(type);
+                found = true;
+                break;
             }
         }
-        return false;
+        return found;
     }
 
 }
