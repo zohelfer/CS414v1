@@ -1,6 +1,7 @@
 package Contollers;
 
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.Set;
 
 /**
@@ -15,6 +16,7 @@ public class UsersController {
 
     private HashSet<Customer> customers;
     private HashSet<Manager> managers;
+    private Hashtable<String, String> logins;
     private Reader fileReader;
     private Writer fileWriter;
 
