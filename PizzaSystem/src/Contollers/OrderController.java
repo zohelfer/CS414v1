@@ -22,6 +22,10 @@ public class OrderController {
         orderItems = new Hashtable<MenuItem, Integer>();
     }
 
+    // Resets to an empty order
+    public void resetInstance(){
+        ourInstance = new OrderController();
+    }
     // Returns the size of the order (# items)
     public int addToOrder(String n, double p, boolean isS){
         MenuItem adding = new MenuItem(n,p,isS);
@@ -34,10 +38,49 @@ public class OrderController {
             }
         }
         orderItems.put(adding, oldQuantity + 1);
-        return orderItems.get(adding);
+        return orderItems.get(adding); //Size of new item
     }
 
-//    public int addToOrder(MenuItem mi){
-//        //orderItems.add()
-//    }
+    // Return: -1 if item not found
+    public int getQuantity(String n, double p, boolean isS){
+        MenuItem looking = new MenuItem(n,p,isS);
+        int quantity = -1;
+        for(MenuItem m: orderItems.keySet()){
+            if(m.equals(looking)){
+                quantity = orderItems.get(m);
+                break;
+            }
+        }
+        return quantity;
+    }
+
+    // -1 if item not found
+    public int removeSingleItemFromOrder(String n, double p, boolean isS){
+        MenuItem removing = new MenuItem(n,p,isS);
+        int newQuantity = -1;
+        for(MenuItem m: orderItems.keySet()){
+            if(m.equals(removing)){
+                int oldQuantity = orderItems.get(m);
+                orderItems.remove(m);
+                orderItems.put(removing, oldQuantity -1);
+                newQuantity = orderItems.get(removing);
+                break;
+            }
+        }
+        return newQuantity;
+    }
+
+    // Return: False - item not found
+    public boolean removeAllMatchingItems(String n, double p, boolean isS){
+        boolean found = false;
+        MenuItem removing = new MenuItem(n,p,isS);
+        for(MenuItem m: orderItems.keySet()){
+            if(m.equals(removing)){
+                orderItems.remove(m);
+                found = true;
+                break;
+            }
+        }
+        return found;
+    }
 }
