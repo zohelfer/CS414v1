@@ -26,9 +26,11 @@ public class editItemUI extends javax.swing.JFrame {
     private DefaultListModel drinks = new DefaultListModel();
     private DefaultListModel specials = new DefaultListModel();
     private DefaultListModel coupons = new DefaultListModel();
-    
-    public editItemUI() {
+    private  MainMenu menu;
+
+    public editItemUI(MainMenu mm) {
         initComponents();
+        menu = mm;
         for (MenuItem m : MenuController.getInstance().loadMenu())
         {
             pizzas.addElement(m.getName());
@@ -340,6 +342,7 @@ public class editItemUI extends javax.swing.JFrame {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
         MenuController.getInstance().saveMenu();
+        menu.UpdateUI();
         this.dispose();
     }//GEN-LAST:event_saveButtonActionPerformed
 

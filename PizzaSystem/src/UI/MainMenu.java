@@ -21,7 +21,48 @@ import Contollers.OrderController;
  *
  * @author ydubale
  */
+
 public class MainMenu extends javax.swing.JFrame {
+
+    private class pizzaActionListener implements ActionListener {
+        private MainMenu menu;
+
+        public pizzaActionListener(MainMenu menu) {
+            this.menu = menu;
+        }
+
+        public void actionPerformed(ActionEvent event) {
+            int i = pizzaButtonList.indexOf(event.getSource());
+            ProductDesc PD = new ProductDesc(menu,convert(MenuController.getInstance().loadMenu()).get(i));
+            PD.setVisible(true);
+        }
+    }
+    private class drinkActionListener implements ActionListener {
+        private MainMenu menu;
+
+        public drinkActionListener(MainMenu menu) {
+            this.menu = menu;
+        }
+
+        public void actionPerformed(ActionEvent event) {
+            int i = drinkButtonList.indexOf(event.getSource());
+            ProductDesc PD = new ProductDesc(menu,convert(MenuController.getInstance().loadMenu()).get(i));
+            PD.setVisible(true);
+        }
+    }
+    private class specialActionListener implements ActionListener {
+        private MainMenu menu;
+
+        public specialActionListener(MainMenu menu) {
+            this.menu = menu;
+        }
+
+        public void actionPerformed(ActionEvent event) {
+            int i = specialButtonList.indexOf(event.getSource());
+            ProductDesc PD = new ProductDesc(menu,convert(MenuController.getInstance().loadMenu()).get(i));
+            PD.setVisible(true);
+        }
+    }
 
     /**
      * Creates new form MainMenu
@@ -56,15 +97,7 @@ public class MainMenu extends javax.swing.JFrame {
         JButton button = new JButton(buttonName);
         button.setPreferredSize(new Dimension(100,100));
         pizzaButtonList.add(button);
-        button.addActionListener(
-                new ActionListener(){
-                    public void actionPerformed(ActionEvent event){
-                        int i = pizzaButtonList.indexOf(event.getSource());
-                        ProductDesc PD = new ProductDesc(convert(MenuController.getInstance().loadMenu()).get(i));
-                        PD.setVisible(true);
-                    }
-                }
-        );
+        button.addActionListener(new pizzaActionListener(this));
         return button;
     }
 
@@ -73,16 +106,7 @@ public class MainMenu extends javax.swing.JFrame {
         JButton button = new JButton(buttonName);
         button.setPreferredSize(new Dimension(100,50));
         drinkButtonList.add(button);
-        button.addActionListener(
-                new ActionListener(){
-                    public void actionPerformed(ActionEvent event){
-                        int i = drinkButtonList.indexOf(event.getSource());
-                        ProductDesc PD = new ProductDesc(new MenuItem("",1.0,true));
-                      //  PD.setPizzaNameLabel(drinkButtonList.get(i).getText());
-                        PD.setVisible(true);
-                    }
-                }
-        );
+        button.addActionListener(new drinkActionListener(this));
         return button;
     }
 
@@ -91,16 +115,7 @@ public class MainMenu extends javax.swing.JFrame {
         JButton button = new JButton(buttonName);
         button.setPreferredSize(new Dimension(100,50));
         specialButtonList.add(button);
-        button.addActionListener(
-                new ActionListener(){
-                    public void actionPerformed(ActionEvent event){
-                        int i = specialButtonList.indexOf(event.getSource());
-                        ProductDesc PD = new ProductDesc(new MenuItem("",1.0,true));
-                       // PD.setPizzaNameLabel(specialButtonList.get(i).getText());
-                        PD.setVisible(true);
-                    }
-                }
-        );
+        button.addActionListener(new specialActionListener(this));
         return button;
     }
     
@@ -163,7 +178,7 @@ public class MainMenu extends javax.swing.JFrame {
         pizzaPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         pizzaPanel.setPreferredSize(new Dimension(350,50));
         JPanel pizzaGrid = new javax.swing.JPanel();
-        pizzaGrid.setLayout(new GridLayout(3,4));
+        pizzaGrid.setLayout(new GridLayout(3,pizzaButtonList.size()/3));
         for(JButton pizza : pizzaButtonList)
         {
             pizzaGrid.add(pizza);
@@ -176,7 +191,7 @@ public class MainMenu extends javax.swing.JFrame {
         drinkPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         drinkPanel.setPreferredSize(new Dimension(350,50));
         JPanel drinkGrid = new javax.swing.JPanel();
-        drinkGrid.setLayout(new GridLayout(2,3));
+        drinkGrid.setLayout(new GridLayout(2,drinkButtonList.size()/2));
         for(JButton drink : drinkButtonList)
         {
             drinkGrid.add(drink);
@@ -233,7 +248,7 @@ public class MainMenu extends javax.swing.JFrame {
         specialPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         specialPanel.setPreferredSize(new Dimension(350,50));
         JPanel specialGrid = new javax.swing.JPanel();
-        specialGrid.setLayout(new GridLayout(2,3));
+        specialGrid.setLayout(new GridLayout(2,specialButtonList.size()/2));
         for(JButton special : specialButtonList)
         {
             specialGrid.add(special);
@@ -373,21 +388,47 @@ public class MainMenu extends javax.swing.JFrame {
         pack();
     }
 
+    public void UpdateUI()
+    {
+        this.dispose();
+        new MainMenu().setVisible(true);
+    }
+
+    public void UpdateOrder()
+    {
+        order.clear();
+        for(MenuItem m: OrderController.getInstance().getOrderItems().keySet())
+        {
+            Double Price = OrderController.getInstance().getOrderItems().get(m) * m.getPrice();
+            String orderItem = "   ";
+            orderItem += m.getName();
+            orderItem += "   ";
+            orderItem += OrderController.getInstance().getOrderItems().get(m);
+            orderItem += "   ";
+            orderItem += Price;
+            order.addElement(orderItem);
+        }
+        totalPriceLabel.setText(String.format( "$%.2f", OrderController.getInstance().getOrderTotal()));
+    }
+
+
     private void removeItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeItemButtonActionPerformed
         // TODO add your handling code here:
         int removeID = orderList.getSelectedIndex();
         if (removeID > -1)
         {
-
+            OrderController.getInstance().getOrderItems();
         }
+        UpdateOrder();
+        totalPriceLabel.setText(String.format( "$%.2f", OrderController.getInstance().getOrderTotal()));
     }//GEN-LAST:event_removeItemButtonActionPerformed
 
     private void cancelOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderButtonActionPerformed
         // TODO add your handling code here:
 
         DefaultListModel orderModel = (DefaultListModel) orderList.getModel();
-        orderModel.removeAllElements();
-
+        OrderController.getInstance().resetInstance();
+        UpdateOrder();
         totalPriceLabel.setText("$0.00");
     }//GEN-LAST:event_cancelOrderButtonActionPerformed
 
@@ -398,7 +439,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void managerEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managerEditButtonActionPerformed
         // TODO add your handling code here:
-        editItemUI editUI = new editItemUI();
+        editItemUI editUI = new editItemUI(this);
         editUI.setVisible(true);
     }//GEN-LAST:event_managerEditButtonActionPerformed
 
@@ -418,24 +459,8 @@ public class MainMenu extends javax.swing.JFrame {
         this.order.addElement(order);
         
     }
-    
-    public void updatePrice (double price, boolean add)
-    {
-        double current = Double.parseDouble(totalPriceLabel.getText().substring(1));
-        double total = 0.0;
-        if(add)
-        {
-            total = current + price;
-        }
-        else
-        {
-            total = current - price;
-        }
-        totalPriceLabel.setText(String.format( "$%.2f", total));
-    }
-        /**
-     * @param args the command line arguments
-     */
+
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
