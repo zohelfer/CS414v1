@@ -30,25 +30,6 @@ public class Writer {
 		catch(FileNotFoundException e) { wroteSuccess = false; }
         return wroteSuccess;
 	}
-    //TODO:Return something?
-    public void writeOrders(ArrayList<Order> order) {
-        try {
-            PrintWriter pw = new PrintWriter(new File(FileName.ORDER.name()));
-            ArrayList<MenuItem> m = new ArrayList<MenuItem>();
-            for(Order o : order) {
-                m = o.getOrderList();
-                pw.println(o.getOrderNumber() + splitDelimiter +
-                        o.getAmountDue() + splitDelimiter +
-                        o.isComplete() + splitDelimiter + m.size());
-
-                for(MenuItem i : m) {
-                    pw.println(i.getName() + splitDelimiter +
-                            i.getPrice() + splitDelimiter + i.getTypeString());
-                }
-            }
-            pw.close();
-        } catch(FileNotFoundException e) { }
-    }
 
     public boolean writeIncompleteOrders(Hashtable<MenuItem, Integer> orderItems){
         try{

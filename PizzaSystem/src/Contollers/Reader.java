@@ -34,39 +34,7 @@ public class Reader {
         }
 		return m;
 	}
-	public ArrayList<Order> readOrders() {
-		ArrayList<Order> o = new ArrayList<Order>();
-		Order order;
-		MenuItem m;
-		int orderNumber;
-		double amountDue;
-		boolean isComplete;
-		try {
-			Scanner scan = new Scanner(new File(FileName.ORDER.name()));
-            ArrayList<MenuItem> items = new ArrayList<MenuItem>();
-			while(scan.hasNextLine()) {
-                String[] info = scan.nextLine().split(spaceDelimiter);
-                if(info.length > 1) {
-                    for (int i = 0; i < Integer.parseInt(info[3]); i++) {
-                        String[] item = scan.nextLine().split(spaceDelimiter);
-                        MenuItem mi = new MenuItem(item[0],
-                                Double.parseDouble(item[1]),
-                                ItemType.valueOf(item[2]));
-                        items.add(mi);
-                    }
-                    order = new Order(items, Integer.parseInt(info[0]),
-                            Double.parseDouble(info[1]),
-                            Boolean.parseBoolean(info[2]));
-                    o.add(order);
-                }
-			}
-			scan.close();
-		}
-		catch(FileNotFoundException e) {
-            System.err.print("Could not find file\n");
-		}
-		return o;
-	}
+
     public Hashtable<MenuItem, Integer> readIncomplete(){
         Hashtable<MenuItem, Integer> incompleteOrders = new Hashtable<MenuItem, Integer>();
         try{
@@ -96,6 +64,7 @@ public class Reader {
         }
         return incompleteOrders;
     }
+
     public HashSet<Customer> readCustomer(){
         HashSet<Customer> customers = new HashSet<Customer>();
         try{
