@@ -40,7 +40,7 @@ public class MainMenu extends javax.swing.JFrame {
     /**
      * Creates new form MainMenu
      */
-    private Customer customer;
+    private Customer customer = null;
     private DefaultListModel order;
     public boolean ManagerMode = false;
     public MainMenu() {
@@ -99,6 +99,7 @@ public class MainMenu extends javax.swing.JFrame {
     
     public void ManagerMode(boolean manager)
     {
+        ManagerMode = true;
         managerEditButton.setVisible(manager);
     }
 
@@ -377,8 +378,19 @@ public class MainMenu extends javax.swing.JFrame {
 
     public void UpdateUI()
     {
-        this.dispose();
-        new MainMenu().setVisible(true);
+        MainMenu menu = new MainMenu();
+        if(this.ManagerMode)
+        {
+            menu.ManagerMode(true);
+            menu.setWelcomeLabel("Welcome, Manager");
+        }
+        else if (this.customer != null)
+        {
+            menu.setCustomer(this.customer);
+        }
+
+            menu.setVisible(true);
+            this.dispose();
     }
 
     public void UpdateOrder()
@@ -447,9 +459,11 @@ public class MainMenu extends javax.swing.JFrame {
         coupon.setVisible(true);
     }//GEN-LAST:event_submitOrderButtonActionPerformed
 
+
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
         LoginUI lUI = new LoginUI(this);
+
         lUI.setVisible(true);
     }//GEN-LAST:event_loginButtonActionPerformed
 
@@ -486,6 +500,18 @@ public class MainMenu extends javax.swing.JFrame {
         });
     }
 
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+        setWelcomeLabel("Welcome, " + customer.getName());
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setWelcomeLabel(String welcomeLabel) {
+        this.welcomeLabel.setText(welcomeLabel);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelOrderButton;

@@ -5,8 +5,11 @@
  */
 package UI;
 
+import Contollers.Customer;
 import Contollers.MenuItem;
 import Contollers.UsersController;
+
+import javax.swing.*;
 
 /**
  *
@@ -122,7 +125,17 @@ public class CustLogin extends javax.swing.JFrame {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
-       // UsersController.getInstance().
+        Customer cust = UsersController.getInstance().getCustomer(this.jTextField1.getText(),this.jPasswordField1.getText());
+
+        if (cust != null)
+        {
+            menu.setCustomer(cust);
+            this.dispose();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Invalid Email or Password");
+        }
 
     }//GEN-LAST:event_submitButtonActionPerformed
 
