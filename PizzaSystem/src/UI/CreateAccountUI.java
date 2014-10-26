@@ -42,6 +42,9 @@ public class CreateAccountUI extends javax.swing.JFrame {
         phoneErrorLabel = new javax.swing.JLabel();
         emailErrorLabel = new javax.swing.JLabel();
         addressErrorLabel = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        passwordTextField = new javax.swing.JTextField();
+        addressErrorLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 250, 0, 0));
@@ -82,6 +85,11 @@ public class CreateAccountUI extends javax.swing.JFrame {
         addressErrorLabel.setForeground(new java.awt.Color(255, 0, 0));
         addressErrorLabel.setText("*");
 
+        jLabel5.setText("Password:");
+
+        addressErrorLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        addressErrorLabel1.setText("*");
+
         javax.swing.GroupLayout custInfoPanelLayout = new javax.swing.GroupLayout(custInfoPanel);
         custInfoPanel.setLayout(custInfoPanelLayout);
         custInfoPanelLayout.setHorizontalGroup(
@@ -89,6 +97,10 @@ public class CreateAccountUI extends javax.swing.JFrame {
             .addGroup(custInfoPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(custInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(custInfoPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(passwordTextField))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, custInfoPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -110,7 +122,8 @@ public class CreateAccountUI extends javax.swing.JFrame {
                     .addComponent(nameErrorLabel)
                     .addComponent(phoneErrorLabel)
                     .addComponent(emailErrorLabel)
-                    .addComponent(addressErrorLabel))
+                    .addComponent(addressErrorLabel)
+                    .addComponent(addressErrorLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         custInfoPanelLayout.setVerticalGroup(
@@ -120,7 +133,7 @@ public class CreateAccountUI extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nameErrorLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(custInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -134,7 +147,14 @@ public class CreateAccountUI extends javax.swing.JFrame {
                 .addGroup(custInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(addressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addressErrorLabel)))
+                    .addComponent(addressErrorLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(custInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(custInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addressErrorLabel1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -157,8 +177,8 @@ public class CreateAccountUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(custInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(custInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
                     .addComponent(createButton))
@@ -179,6 +199,7 @@ public class CreateAccountUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addressErrorLabel;
+    private javax.swing.JLabel addressErrorLabel1;
     private javax.swing.JTextField addressTextField;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton createButton;
@@ -189,8 +210,10 @@ public class CreateAccountUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel nameErrorLabel;
     private javax.swing.JTextField nameTextField;
+    private javax.swing.JTextField passwordTextField;
     private javax.swing.JLabel phoneErrorLabel;
     private javax.swing.JTextField phoneTextField;
     // End of variables declaration//GEN-END:variables
