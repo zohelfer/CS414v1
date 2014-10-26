@@ -91,7 +91,7 @@ public class ProductDesc extends javax.swing.JFrame {
         {
             filepath = "images/soft-drinks.png";
         }
-        else
+        else if (item.getType().equals(ItemType.SPECIAL))
         {
             filepath = "images/pizza-icon.png";
         }

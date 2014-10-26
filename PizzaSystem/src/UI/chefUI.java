@@ -5,11 +5,16 @@
  */
 package UI;
 
+
 import Contollers.MenuItem;
 import Contollers.OrderController;
 
 import javax.swing.*;
 import java.util.Hashtable;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 /**
  *
@@ -24,7 +29,17 @@ public class chefUI extends javax.swing.JFrame {
     /**
      * Creates new form chefUI
      */
+    private Timer timer;
+    private class UpdateUI extends TimerTask
+    {
+        public void run()
+        {
+            System.out.println("TEST");
+        }
+
+    }
     public chefUI() {
+
         oc = OrderController.getInstance();
         Hashtable<MenuItem, Integer> incompleteItems = oc.getIncompleteItems();
         for(MenuItem m : incompleteItems.keySet()){
@@ -32,7 +47,12 @@ public class chefUI extends javax.swing.JFrame {
                 incompleteList.addElement(m.getName());
             }
         }
+
+        timer = new Timer();
+
         initComponents();
+        timer.schedule(new UpdateUI(),0,5000);
+
     }
 
     /**

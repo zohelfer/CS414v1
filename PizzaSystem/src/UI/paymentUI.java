@@ -432,6 +432,7 @@ public class paymentUI extends javax.swing.JFrame {
         else
         {
             errorMessageLabel.setVisible(false);
+            OrderController.getInstance().submitOrder();
             this.dispose();
         }
             

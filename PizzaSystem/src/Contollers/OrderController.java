@@ -19,6 +19,7 @@ public class OrderController {
 
     private OrderController() {
         fileWriter = new Writer();
+        fileReader = new Reader();
         orderItems = new Hashtable<MenuItem, Integer>();
     }
 
