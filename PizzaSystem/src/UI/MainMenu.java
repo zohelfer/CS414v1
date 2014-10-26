@@ -404,9 +404,20 @@ public class MainMenu extends javax.swing.JFrame {
     private void removeItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeItemButtonActionPerformed
         // TODO add your handling code here:
         int removeID = orderList.getSelectedIndex();
+
         if (removeID > -1)
         {
-            OrderController.getInstance().getOrderItems();
+            String s = order.elementAt(removeID).toString();
+            String[] tokens = s.split("   ");
+            System.out.println(tokens[1]);
+            for(MenuItem m : MenuController.getInstance().loadMenu())
+            {
+                if(m.getName().equals(tokens[1]))
+                {
+                    OrderController.getInstance().removeAllMatchingItems(m.getName(),m.getPrice(),m.getType());
+                    break;
+                }
+            }
         }
         UpdateOrder();
         totalPriceLabel.setText(String.format( "$%.2f", OrderController.getInstance().getOrderTotal()));
