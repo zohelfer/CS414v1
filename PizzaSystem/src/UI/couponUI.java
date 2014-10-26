@@ -35,7 +35,7 @@ public class couponUI extends javax.swing.JFrame {
         setBounds(new java.awt.Rectangle(500, 250, 0, 0));
         setResizable(false);
 
-        jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        //jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Do you have any coupons?");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
