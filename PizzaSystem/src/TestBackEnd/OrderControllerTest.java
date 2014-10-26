@@ -54,11 +54,28 @@ public class OrderControllerTest {
     }
 
     @Test
-    public void testRemoveSingleItem() throws Exception{
-        testAdd(3);
-        oc.removeSingleItemFromOrder(iName, iP, isS);
-        assertEquals(2, oc.getQuantity(iName, iP, isS));
-        oc.resetInstance();
+    public void testCompleteItem1() throws Exception {
+        testAdd(2);
+        oc.addToOrder("Pizza", 6.4, ItemType.PIZZA);
+        assertTrue(oc.completeItem("Pizza", 6.4, ItemType.PIZZA));
+    }
+
+    @Test
+    public void testCompleteItem2() throws Exception {
+        testAdd(2);
+        assertFalse(oc.completeItem("Pizza", 6.4, ItemType.PIZZA));
+    }
+
+    @Test
+    public void testSendBackToKitchen1() throws Exception {
+        testAdd(2);
+        assertTrue(oc.sendBackToKitchen(iName, iP, isS));
+    }
+
+    @Test
+    public void testSendBackToKitchen2() throws Exception {
+        testAdd(2);
+        assertFalse(oc.sendBackToKitchen("Pizza", 6.4, ItemType.PIZZA));
     }
 
     @Test
