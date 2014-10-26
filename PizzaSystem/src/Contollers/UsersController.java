@@ -33,6 +33,10 @@ public class UsersController {
         maxID = getMaxID();
     }
 
+    public void resetInstance(){
+
+    }
+
     private int getUniqueID(){
         for(int i=0; i < maxID; i++){
             if(!ids.contains(new Integer(i))){
@@ -55,6 +59,26 @@ public class UsersController {
 
     public UsersController reloadUsersCont(){
         return new UsersController();
+    }
+
+    public Customer getCustomer(String e, String p){
+        Customer foundCus = null;
+        for(Customer c : customers){
+            if(c.getEmail().equals(e)){
+                foundCus = c;
+                break;
+            }
+        }
+        if(foundCus != null){
+            String existingPass = logins.get(e);
+            if(existingPass.equals(p)){
+                return foundCus;
+            }
+            else{
+                return null;
+            }
+        }
+        return foundCus;
     }
 
     public int getCustomerCount(){
