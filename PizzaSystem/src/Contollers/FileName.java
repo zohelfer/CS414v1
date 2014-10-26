@@ -6,5 +6,7 @@ package Contollers;
 public enum FileName {
     ORDER,
     INCOMPLETE,
-    MENU
+    MENU,
+    CUSTOMER,
+    MANAGER
 }

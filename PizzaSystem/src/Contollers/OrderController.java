@@ -26,6 +26,10 @@ public class OrderController {
     public void resetInstance(){
         ourInstance = new OrderController();
     }
+
+    public Hashtable<MenuItem, Integer> getOrderItems(){
+        return orderItems;
+    }
     // Returns the size of the order (# items)
     public int addToOrder(String n, double p, boolean isS){
         MenuItem adding = new MenuItem(n,p,isS);

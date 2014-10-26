@@ -10,7 +10,8 @@ import java.util.Scanner;
 
 public class Reader {
 
-    private String splitDelimiter = " ";
+    private String spaceDelimiter = " ";
+    private String starDelimiter = "*";
 
     public HashSet<MenuItem> readMenu() {
 		HashSet<MenuItem> m = new HashSet<MenuItem>();
@@ -18,7 +19,7 @@ public class Reader {
 		try {
 			Scanner scan = new Scanner(new File(FileName.MENU.name()));
 			while(scan.hasNextLine()) {
-             String[] line = scan.nextLine().split(splitDelimiter);
+             String[] line = scan.nextLine().split(spaceDelimiter);
              if(line.length > 1) {
                  mi = new MenuItem(line[0], Double.parseDouble(line[1]), Boolean.parseBoolean(line[2]));
                  m.add(mi);
@@ -42,10 +43,10 @@ public class Reader {
 			Scanner scan = new Scanner(new File(FileName.ORDER.name()));
             ArrayList<MenuItem> items = new ArrayList<MenuItem>();
 			while(scan.hasNextLine()) {
-                String[] info = scan.nextLine().split(splitDelimiter);
+                String[] info = scan.nextLine().split(spaceDelimiter);
                 if(info.length > 1) {
                     for (int i = 0; i < Integer.parseInt(info[3]); i++) {
-                        String[] item = scan.nextLine().split(splitDelimiter);
+                        String[] item = scan.nextLine().split(spaceDelimiter);
                         MenuItem mi = new MenuItem(item[0],
                                 Double.parseDouble(item[1]),
                                 Boolean.parseBoolean(item[2]));
@@ -64,7 +65,6 @@ public class Reader {
 		}
 		return o;
 	}
-
     public Hashtable<MenuItem, Integer> readIncomplete(){
         Hashtable<MenuItem, Integer> incompleteOrders = new Hashtable<MenuItem, Integer>();
         try{
@@ -77,14 +77,14 @@ public class Reader {
                 BufferedReader bfr = new BufferedReader(new FileReader(f));
                 String line;
                 while((line = bfr.readLine()) != null){
-                    String[] allLines = line.split(splitDelimiter);
+                    String[] allLines = line.split(spaceDelimiter);
                     Integer quantity = new Integer(allLines[0]);
                     MenuItem m = new MenuItem(
                             allLines[1],
                             Double.parseDouble(allLines[2]),
                             Boolean.parseBoolean(allLines[3]));
 
-                    incompleteOrders.put(m,quantity);
+                    incompleteOrders.put(m, quantity);
                 }
             }
         }
@@ -93,6 +93,33 @@ public class Reader {
             return new Hashtable<MenuItem, Integer>();
         }
         return incompleteOrders;
+    }
+    public HashSet<Customer> readCustomer(){
+        HashSet<Customer> customers = new HashSet<Customer>();
+        try{
+            File f = new File(FileName.CUSTOMER.name());
+            if(!f.exists()){
+                f.createNewFile();
+                return customers;
+            }
+            synchronized (f){
+                BufferedReader bfr = new BufferedReader(new FileReader(f));
+                String line;
+                while((line = bfr.readLine()) != null){
+                    String[] allLines = line.split(starDelimiter);
+                    customers.add(new Customer(
+                            allLines[0],allLines[1],allLines[2],
+                            allLines[3], Integer.parseInt(allLines[4])
+                    ));
+                }
+            }
+        }
+        catch(IOException ioE){
+            System.err.print("Error with " + FileName.INCOMPLETE.name());
+            return new HashSet<Customer>();
+        }
+
+        return customers;
     }
     /*
     public static void main(String[]args ) {

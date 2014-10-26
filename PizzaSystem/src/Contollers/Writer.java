@@ -5,6 +5,7 @@ import TempPackage.Order;
 import java.io.*;
 import java.util.ArrayList;
 
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Set;
 
@@ -29,6 +30,7 @@ public class Writer {
 		catch(FileNotFoundException e) { wroteSuccess = false; }
         return wroteSuccess;
 	}
+    //TODO:Return something?
     public void writeOrders(ArrayList<Order> order) {
         try {
             PrintWriter pw = new PrintWriter(new File(FileName.ORDER.name()));
@@ -53,7 +55,6 @@ public class Writer {
             File f = new File(FileName.INCOMPLETE.name());
             if(!f.exists()){
                 f.createNewFile();
-                return false;
             }
             // is it this easy? lol
             synchronized(f){
@@ -70,6 +71,29 @@ public class Writer {
         catch(IOException ioE){
             System.out.println("Problem writing INCOMPLETE file");
             ioE.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean writeCustomer(HashSet<Customer> customers){
+        try{
+            File f = new File(FileName.CUSTOMER.name());
+            if(!f.exists()){
+                f.createNewFile();
+
+            }
+            synchronized (f){
+                BufferedWriter bfw = new BufferedWriter(new FileWriter(f));
+                for(Customer c : customers){
+                    bfw.write(c.toString(),0,c.toString().length());
+                    bfw.newLine();
+                }
+                bfw.close();
+            }
+        }
+        catch(IOException ioE){
+            System.out.println("Problem writing customers file");
             return false;
         }
         return true;
