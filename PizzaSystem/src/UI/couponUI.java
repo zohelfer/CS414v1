@@ -14,7 +14,9 @@ public class couponUI extends javax.swing.JFrame {
     /**
      * Creates new form couponUI
      */
-    public couponUI() {
+    private MainMenu menu;
+    public couponUI(MainMenu mm) {
+        this.menu = mm;
         initComponents();
     }
 
@@ -86,14 +88,14 @@ public class couponUI extends javax.swing.JFrame {
 
     private void yesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yesButtonActionPerformed
         // TODO add your handling code here:
-        couponCodeUI coupon = new couponCodeUI();
+        couponCodeUI coupon = new couponCodeUI(menu);
         coupon.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_yesButtonActionPerformed
 
     private void noButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noButtonActionPerformed
         // TODO add your handling code here:
-        paymentUI payment = new paymentUI();
+        paymentUI payment = new paymentUI(menu);
         payment.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_noButtonActionPerformed

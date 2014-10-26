@@ -455,7 +455,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void submitOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitOrderButtonActionPerformed
         // TODO add your handling code here:
-        couponUI coupon = new couponUI();
+        couponUI coupon = new couponUI(this);
         coupon.setVisible(true);
     }//GEN-LAST:event_submitOrderButtonActionPerformed
 
