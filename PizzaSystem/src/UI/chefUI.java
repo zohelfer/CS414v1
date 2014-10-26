@@ -5,16 +5,33 @@
  */
 package UI;
 
+import Contollers.MenuItem;
+import Contollers.OrderController;
+
+import javax.swing.*;
+import java.util.Hashtable;
+
 /**
  *
  * @author zacc
  */
 public class chefUI extends javax.swing.JFrame {
 
+    private OrderController oc;
+    private DefaultListModel incompleteList = new DefaultListModel();
+
+
     /**
      * Creates new form chefUI
      */
     public chefUI() {
+        oc = OrderController.getInstance();
+        Hashtable<MenuItem, Integer> incompleteItems = oc.getIncompleteItems();
+        for(MenuItem m : incompleteItems.keySet()){
+            for(int j = 0; j < incompleteItems.get(m) ; j++){
+                incompleteList.addElement(m.getName());
+            }
+        }
         initComponents();
     }
 
@@ -29,7 +46,7 @@ public class chefUI extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jList1 = new JList(incompleteList);
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList();

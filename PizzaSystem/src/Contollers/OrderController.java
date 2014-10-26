@@ -116,4 +116,8 @@ public class OrderController {
     public boolean submitOrder(){
         return fileWriter.writeIncompleteOrders(orderItems);
     }
+
+    public Hashtable<MenuItem, Integer> getIncompleteItems(){
+        return fileReader.readIncomplete();
+    }
 }

@@ -80,4 +80,8 @@ public class MenuController {
         return false;
     }
 
+//    public boolean createCoupon(String code, String menuItem, int discountAmount){
+//
+//    }
+
 }
