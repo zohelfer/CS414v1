@@ -5,8 +5,8 @@
  */
 package UI;
 
-import Contollers.ItemType;
-import Contollers.MenuController;
+import Contollers.*;
+import Contollers.MenuItem;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,8 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Set;
-import Contollers.MenuItem;
-import Contollers.OrderController;
 
 
 /**
@@ -42,6 +40,7 @@ public class MainMenu extends javax.swing.JFrame {
     /**
      * Creates new form MainMenu
      */
+    private Customer customer;
     private DefaultListModel order;
     public boolean ManagerMode = false;
     public MainMenu() {
@@ -166,7 +165,7 @@ public class MainMenu extends javax.swing.JFrame {
         pizzaPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         pizzaPanel.setPreferredSize(new Dimension(350,50));
         JPanel pizzaGrid = new javax.swing.JPanel();
-        pizzaGrid.setLayout(new GridLayout(3,3));
+        pizzaGrid.setLayout(new GridLayout(3,pizzaButtonList.size()/3));
         for(JButton pizza : pizzaButtonList)
         {
             pizzaGrid.add(pizza);
@@ -177,9 +176,9 @@ public class MainMenu extends javax.swing.JFrame {
         drinkPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Drinks"));
 
         drinkPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        drinkPanel.setPreferredSize(new Dimension(350,100));
+        drinkPanel.setPreferredSize(new Dimension(350,(int)(Math.ceil(drinkButtonList.size()/2)*50 + 150)));
         JPanel drinkGrid = new javax.swing.JPanel();
-        drinkGrid.setLayout(new GridLayout(2,2));
+        drinkGrid.setLayout(new GridLayout(2,drinkButtonList.size()/2));
         for(JButton drink : drinkButtonList)
         {
             drinkGrid.add(drink);
@@ -234,9 +233,9 @@ public class MainMenu extends javax.swing.JFrame {
         specialPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Special Items"));
 
         specialPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        specialPanel.setPreferredSize(new Dimension(350,100));
+        specialPanel.setPreferredSize(new Dimension(350,(int)(Math.ceil(drinkButtonList.size()/2))*50 + 150) );
         JPanel specialGrid = new javax.swing.JPanel();
-        specialGrid.setLayout(new GridLayout(2,2));
+        specialGrid.setLayout(new GridLayout(2,drinkButtonList.size()/2));
         for(JButton special : specialButtonList)
         {
             specialGrid.add(special);
@@ -413,7 +412,7 @@ public class MainMenu extends javax.swing.JFrame {
             {
                 if(m.getName().equals(tokens[1]))
                 {
-                    OrderController.getInstance().removeAllMatchingItems(m.getName(),m.getPrice(),m.getType());
+                    OrderController.getInstance().removeAllMatchingItems(m.getName(), m.getPrice(), m.getType());
                     break;
                 }
             }
@@ -453,11 +452,6 @@ public class MainMenu extends javax.swing.JFrame {
         LoginUI lUI = new LoginUI(this);
         lUI.setVisible(true);
     }//GEN-LAST:event_loginButtonActionPerformed
-
-    public void addOrder(String order) {
-        this.order.addElement(order);
-        
-    }
 
 
     public static void main(String args[]) {

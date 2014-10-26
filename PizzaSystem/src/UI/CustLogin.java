@@ -5,6 +5,9 @@
  */
 package UI;
 
+import Contollers.MenuItem;
+import Contollers.UsersController;
+
 /**
  *
  * @author zacc
@@ -14,7 +17,9 @@ public class CustLogin extends javax.swing.JFrame {
     /**
      * Creates new form CustLogin
      */
-    public CustLogin() {
+    private MainMenu menu;
+    public CustLogin(MainMenu mm) {
+        this.menu = mm;
         initComponents();
     }
 
@@ -117,6 +122,8 @@ public class CustLogin extends javax.swing.JFrame {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
+       // UsersController.getInstance().
+
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
