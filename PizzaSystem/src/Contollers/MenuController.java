@@ -65,10 +65,10 @@ public class MenuController {
         for(MenuItem mi: menuItems){
             if(oldName.equals(newMI.getName())){
                 menuItems.remove(mi);
-                break;
+                return menuItems.add(newMI);
             }
         }
-        return menuItems.add(newMI);
+        return false;
     }
 
 }

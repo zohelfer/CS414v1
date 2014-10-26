@@ -11,6 +11,8 @@ public class MenuItem {
     private double price;
     private ItemType itemtype;
 
+    private String starDelim = "~";
+
     public MenuItem(String name, double price, ItemType type) {
         this.name = name;
         this.price = price;
@@ -53,6 +55,6 @@ public class MenuItem {
     }
 
     public String toString(){
-        return this.name + " " + this.price + " " + this.itemtype.name();
+        return name + starDelim + price + starDelim + getTypeString();
     }
 }
