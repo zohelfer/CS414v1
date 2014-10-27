@@ -354,7 +354,7 @@ public class editItemUI extends javax.swing.JFrame {
         );
 
         jTabbedPane5.addTab("Coupons", couponsPanel);
-
+        jTabbedPane5.setEnabledAt(3,false); //Disable coupons for now
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

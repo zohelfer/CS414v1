@@ -27,18 +27,32 @@ public class chefUI extends javax.swing.JFrame {
     private DefaultListModel incompleteList = new DefaultListModel();
 
 
-    /**
-     * Creates new form chefUI
-     */
+
     private Timer timer;
     private class UpdateUI extends TimerTask
     {
+        private DefaultListModel incompleteList;
+
+        public UpdateUI(DefaultListModel il)
+        {
+            this.incompleteList = il;
+        }
+
         public void run()
         {
-            System.out.println("Refreshing list");
+            incompleteList = new DefaultListModel();
+            Hashtable<MenuItem, Integer> incompleteItems = oc.getIncompleteItems();
+            for(MenuItem m : incompleteItems.keySet()){
+                for(int j = 0; j < incompleteItems.get(m) ; j++){
+                    incompleteList.addElement(m.toString());
+                }
+            }
         }
 
     }
+    /**
+     * Creates new form chefUI
+     */
     public chefUI() {
 
         oc = OrderController.getInstance();
@@ -53,7 +67,7 @@ public class chefUI extends javax.swing.JFrame {
         }
         initComponents();
         timer = new Timer();
-        //timer.schedule(new UpdateUI(),0,5000);
+        timer.schedule(new UpdateUI(incompleteList),0,5000);
 
     }
 
@@ -75,7 +89,7 @@ public class chefUI extends javax.swing.JFrame {
         orderCompleteButton = new javax.swing.JButton();
         sendBackButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 250, 0, 0));
         setResizable(false);
 
@@ -164,7 +178,6 @@ public class chefUI extends javax.swing.JFrame {
             String[] token = sel.split(" ");
             oc.completeItem(token[0], Double.parseDouble(token[1]), ItemType.valueOf(token[2]));
             incompleteList.remove(removedIndex);
-            jList1 = new JList(incompleteList);
         }
     }//GEN-LAST:event_orderCompleteButtonActionPerformed
 

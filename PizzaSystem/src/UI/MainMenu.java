@@ -412,7 +412,6 @@ public class MainMenu extends javax.swing.JFrame {
 
 
     private void removeItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeItemButtonActionPerformed
-        // TODO add your handling code here:
         int removeID = orderList.getSelectedIndex();
 
         if (removeID > -1)
@@ -434,8 +433,6 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_removeItemButtonActionPerformed
 
     private void cancelOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderButtonActionPerformed
-        // TODO add your handling code here:
-
         DefaultListModel orderModel = (DefaultListModel) orderList.getModel();
         OrderController.getInstance().resetInstance();
         UpdateOrder();
@@ -443,27 +440,22 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelOrderButtonActionPerformed
 
     private void orderListComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_orderListComponentAdded
-        // TODO add your handling code here
 
     }//GEN-LAST:event_orderListComponentAdded
 
     private void managerEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managerEditButtonActionPerformed
-        // TODO add your handling code here:
         editItemUI editUI = new editItemUI(this);
         editUI.setVisible(true);
     }//GEN-LAST:event_managerEditButtonActionPerformed
 
     private void submitOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitOrderButtonActionPerformed
-        // TODO add your handling code here:
-        couponUI coupon = new couponUI(this);
-        coupon.setVisible(true);
+        paymentUI pay= new paymentUI(this);
+        pay.setVisible(true);
     }//GEN-LAST:event_submitOrderButtonActionPerformed
 
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        // TODO add your handling code here:
         LoginUI lUI = new LoginUI(this);
-
         lUI.setVisible(true);
     }//GEN-LAST:event_loginButtonActionPerformed
 
