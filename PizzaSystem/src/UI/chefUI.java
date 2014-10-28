@@ -25,6 +25,7 @@ public class chefUI extends javax.swing.JFrame {
 
     private OrderController oc;
     private DefaultListModel incompleteList = new DefaultListModel();
+    private DefaultListModel finishedList = new DefaultListModel();
 
 
 
@@ -32,6 +33,7 @@ public class chefUI extends javax.swing.JFrame {
     private class UpdateUI extends TimerTask
     {
         private DefaultListModel incompleteList;
+        private DefaultListModel finishedList;
 
         public UpdateUI(DefaultListModel il)
         {
@@ -41,6 +43,7 @@ public class chefUI extends javax.swing.JFrame {
         public void run()
         {
             incompleteList = new DefaultListModel();
+            finishedList = new DefaultListModel();
             Hashtable<MenuItem, Integer> incompleteItems = oc.getIncompleteItems();
             for(MenuItem m : incompleteItems.keySet()){
                 for(int j = 0; j < incompleteItems.get(m) ; j++){
@@ -59,6 +62,7 @@ public class chefUI extends javax.swing.JFrame {
 
         //Populate list
         incompleteList = new DefaultListModel();
+        finishedList = new DefaultListModel();
         Hashtable<MenuItem, Integer> incompleteItems = oc.getIncompleteItems();
         for(MenuItem m : incompleteItems.keySet()){
             for(int j = 0; j < incompleteItems.get(m) ; j++){
@@ -85,7 +89,7 @@ public class chefUI extends javax.swing.JFrame {
         jList1 = new JList(incompleteList);
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
+        jList2 = new JList(finishedList);
         orderCompleteButton = new javax.swing.JButton();
         sendBackButton = new javax.swing.JButton();
 
@@ -178,6 +182,7 @@ public class chefUI extends javax.swing.JFrame {
             String[] token = sel.split(" ");
             oc.completeItem(token[0], Double.parseDouble(token[1]), ItemType.valueOf(token[2]));
             incompleteList.remove(removedIndex);
+            finishedList.addElement(sel);
         }
     }//GEN-LAST:event_orderCompleteButtonActionPerformed
 
