@@ -91,6 +91,10 @@ public class OrderController {
         return false;
     }
 
+    public Hashtable<MenuItem, Integer> readIncompleteOrders() {
+        return fileReader.readIncomplete();
+    }
+
     // Return: False - item not found
     public boolean removeAllMatchingItems(String n, double p, ItemType type){
         boolean found = false;
