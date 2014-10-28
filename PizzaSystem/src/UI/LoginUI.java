@@ -85,7 +85,7 @@ public class LoginUI extends javax.swing.JFrame {
 
     private void buttonCusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCusActionPerformed
         // TODO add your handling code here:
-        CustLogin cust = new CustLogin();
+        CustLogin cust = new CustLogin(menu);
         cust.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_buttonCusActionPerformed

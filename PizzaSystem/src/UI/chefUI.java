@@ -5,17 +5,74 @@
  */
 package UI;
 
+
+import Contollers.ItemType;
+import Contollers.MenuItem;
+import Contollers.OrderController;
+
+import javax.swing.*;
+import java.util.Hashtable;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+
 /**
  *
  * @author zacc
  */
 public class chefUI extends javax.swing.JFrame {
 
+    private OrderController oc;
+    private DefaultListModel incompleteList = new DefaultListModel();
+    private DefaultListModel finishedList = new DefaultListModel();
+
+
+
+    private Timer timer;
+    private class UpdateUI extends TimerTask
+    {
+        private DefaultListModel incompleteList;
+        private DefaultListModel finishedList;
+
+        public UpdateUI(DefaultListModel il)
+        {
+            this.incompleteList = il;
+        }
+
+        public void run()
+        {
+            incompleteList = new DefaultListModel();
+            finishedList = new DefaultListModel();
+            Hashtable<MenuItem, Integer> incompleteItems = oc.getIncompleteItems();
+            for(MenuItem m : incompleteItems.keySet()){
+                for(int j = 0; j < incompleteItems.get(m) ; j++){
+                    incompleteList.addElement(m.toString());
+                }
+            }
+        }
+
+    }
     /**
      * Creates new form chefUI
      */
     public chefUI() {
+
+        oc = OrderController.getInstance();
+
+        //Populate list
+        incompleteList = new DefaultListModel();
+        finishedList = new DefaultListModel();
+        Hashtable<MenuItem, Integer> incompleteItems = oc.getIncompleteItems();
+        for(MenuItem m : incompleteItems.keySet()){
+            for(int j = 0; j < incompleteItems.get(m) ; j++){
+                incompleteList.addElement(m.toString());
+            }
+        }
         initComponents();
+        timer = new Timer();
+        timer.schedule(new UpdateUI(incompleteList),0,5000);
+
     }
 
     /**
@@ -29,18 +86,18 @@ public class chefUI extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jList1 = new JList(incompleteList);
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
+        jList2 = new JList(finishedList);
         orderCompleteButton = new javax.swing.JButton();
         sendBackButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(500, 250, 0, 0));
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Current Orders", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 0, 24))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Current Orders", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 24))); // NOI18N
 
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
@@ -58,9 +115,9 @@ public class chefUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Completed Orders", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Abyssinica SIL", 0, 24))); // NOI18N
-
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Completed Orders", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 24))); // NOI18N
         jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
         jScrollPane2.setViewportView(jList2);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -118,6 +175,15 @@ public class chefUI extends javax.swing.JFrame {
 
     private void orderCompleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderCompleteButtonActionPerformed
         // TODO add your handling code here:
+        int removedIndex = jList1.getSelectedIndex();
+
+        if( removedIndex > -1){
+            String sel = incompleteList.elementAt(removedIndex).toString();
+            String[] token = sel.split(" ");
+            oc.completeItem(token[0], Double.parseDouble(token[1]), ItemType.valueOf(token[2]));
+            incompleteList.remove(removedIndex);
+            finishedList.addElement(sel);
+        }
     }//GEN-LAST:event_orderCompleteButtonActionPerformed
 
 

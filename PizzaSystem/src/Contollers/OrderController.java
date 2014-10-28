@@ -19,6 +19,7 @@ public class OrderController {
 
     private OrderController() {
         fileWriter = new Writer();
+        fileReader = new Reader();
         orderItems = new Hashtable<MenuItem, Integer>();
     }
 
@@ -61,6 +62,7 @@ public class OrderController {
     public boolean completeItem(String n, double p, ItemType type) {
         MenuItem removing = new MenuItem(n, p, type);
         for(MenuItem m: orderItems.keySet()) {
+            System.out.println("Comparing");
             if(m.equals(removing)) {
                 int oldQ = orderItems.get(m);
                 orderItems.remove(m);
@@ -68,6 +70,7 @@ public class OrderController {
                     orderItems.put(removing, oldQ - 1);
                 }
                 fileWriter.writeIncompleteOrders(orderItems);
+                System.out.println("Wrote file");
                 return true;
             }
         }
@@ -119,5 +122,9 @@ public class OrderController {
 
     public boolean submitOrder(){
         return fileWriter.writeIncompleteOrders(orderItems);
+    }
+
+    public Hashtable<MenuItem, Integer> getIncompleteItems(){
+        return fileReader.readIncomplete();
     }
 }

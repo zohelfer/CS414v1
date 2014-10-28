@@ -63,7 +63,6 @@ public class MenuControllerTest {
 
     @Test
     public void testEditItem2() throws Exception {
-
-        //assertFalse(mc.editItem("Cheese", "Pepperoni", 7.0, ItemType.SPECIAL));
+        assertFalse(mc.editItem("Cheese", "Pepperoni", 7.0, ItemType.SPECIAL));
     }
 }

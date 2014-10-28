@@ -354,7 +354,7 @@ public class editItemUI extends javax.swing.JFrame {
         );
 
         jTabbedPane5.addTab("Coupons", couponsPanel);
-
+        jTabbedPane5.setEnabledAt(3,false); //Disable coupons for now
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -479,14 +479,17 @@ public class editItemUI extends javax.swing.JFrame {
 
     private void addCouponButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCouponButtonActionPerformed
         // TODO add your handling code here:
+        new editCouponUI().setVisible(true);
     }//GEN-LAST:event_addCouponButtonActionPerformed
 
     private void removeCouponButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCouponButtonActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_removeCouponButtonActionPerformed
 
     private void editCouponButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCouponButtonActionPerformed
         // TODO add your handling code here:
+        new editCouponUI().setVisible(true);
     }//GEN-LAST:event_editCouponButtonActionPerformed
 
     // Variables declaration - do not modify

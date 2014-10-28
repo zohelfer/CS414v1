@@ -5,6 +5,12 @@
  */
 package UI;
 
+import Contollers.Customer;
+import Contollers.MenuItem;
+import Contollers.UsersController;
+
+import javax.swing.*;
+
 /**
  *
  * @author zacc
@@ -14,7 +20,9 @@ public class CustLogin extends javax.swing.JFrame {
     /**
      * Creates new form CustLogin
      */
-    public CustLogin() {
+    private MainMenu menu;
+    public CustLogin(MainMenu mm) {
+        this.menu = mm;
         initComponents();
     }
 
@@ -117,6 +125,19 @@ public class CustLogin extends javax.swing.JFrame {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
+        Customer cust = UsersController.getInstance().getCustomer(this.jTextField1.getText(),this.jPasswordField1.getText());
+
+        if (cust != null)
+        {
+            menu.setCustomer(cust);
+            menu.ManagerMode(false);
+            this.dispose();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Invalid Email or Password");
+        }
+
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed

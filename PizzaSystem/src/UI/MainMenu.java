@@ -5,8 +5,8 @@
  */
 package UI;
 
-import Contollers.ItemType;
-import Contollers.MenuController;
+import Contollers.*;
+import Contollers.MenuItem;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,8 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Set;
-import Contollers.MenuItem;
-import Contollers.OrderController;
 
 
 /**
@@ -42,6 +40,7 @@ public class MainMenu extends javax.swing.JFrame {
     /**
      * Creates new form MainMenu
      */
+    private Customer customer = null;
     private DefaultListModel order;
     public boolean ManagerMode = false;
     public MainMenu() {
@@ -100,6 +99,7 @@ public class MainMenu extends javax.swing.JFrame {
     
     public void ManagerMode(boolean manager)
     {
+        ManagerMode = true;
         managerEditButton.setVisible(manager);
     }
 
@@ -166,7 +166,7 @@ public class MainMenu extends javax.swing.JFrame {
         pizzaPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         pizzaPanel.setPreferredSize(new Dimension(350,50));
         JPanel pizzaGrid = new javax.swing.JPanel();
-        pizzaGrid.setLayout(new GridLayout(3,3));
+        pizzaGrid.setLayout(new GridLayout(3,pizzaButtonList.size()/3));
         for(JButton pizza : pizzaButtonList)
         {
             pizzaGrid.add(pizza);
@@ -177,9 +177,9 @@ public class MainMenu extends javax.swing.JFrame {
         drinkPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Drinks"));
 
         drinkPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        drinkPanel.setPreferredSize(new Dimension(350,100));
+        drinkPanel.setPreferredSize(new Dimension(350,(int)(Math.ceil(drinkButtonList.size()/2)*50 + 150)));
         JPanel drinkGrid = new javax.swing.JPanel();
-        drinkGrid.setLayout(new GridLayout(2,2));
+        drinkGrid.setLayout(new GridLayout(2,drinkButtonList.size()/2));
         for(JButton drink : drinkButtonList)
         {
             drinkGrid.add(drink);
@@ -234,9 +234,9 @@ public class MainMenu extends javax.swing.JFrame {
         specialPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Special Items"));
 
         specialPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        specialPanel.setPreferredSize(new Dimension(350,100));
+        specialPanel.setPreferredSize(new Dimension(350,(int)(Math.ceil(drinkButtonList.size()/2))*50 + 150) );
         JPanel specialGrid = new javax.swing.JPanel();
-        specialGrid.setLayout(new GridLayout(2,2));
+        specialGrid.setLayout(new GridLayout(2,drinkButtonList.size()/2));
         for(JButton special : specialButtonList)
         {
             specialGrid.add(special);
@@ -378,8 +378,19 @@ public class MainMenu extends javax.swing.JFrame {
 
     public void UpdateUI()
     {
-        this.dispose();
-        new MainMenu().setVisible(true);
+        MainMenu menu = new MainMenu();
+        if(this.ManagerMode)
+        {
+            menu.ManagerMode(true);
+            menu.setWelcomeLabel("Welcome, Manager");
+        }
+        else if (this.customer != null)
+        {
+            menu.setCustomer(this.customer);
+        }
+
+            menu.setVisible(true);
+            this.dispose();
     }
 
     public void UpdateOrder()
@@ -401,7 +412,6 @@ public class MainMenu extends javax.swing.JFrame {
 
 
     private void removeItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeItemButtonActionPerformed
-        // TODO add your handling code here:
         int removeID = orderList.getSelectedIndex();
 
         if (removeID > -1)
@@ -413,7 +423,7 @@ public class MainMenu extends javax.swing.JFrame {
             {
                 if(m.getName().equals(tokens[1]))
                 {
-                    OrderController.getInstance().removeAllMatchingItems(m.getName(),m.getPrice(),m.getType());
+                    OrderController.getInstance().removeAllMatchingItems(m.getName(), m.getPrice(), m.getType());
                     break;
                 }
             }
@@ -423,8 +433,6 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_removeItemButtonActionPerformed
 
     private void cancelOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelOrderButtonActionPerformed
-        // TODO add your handling code here:
-
         DefaultListModel orderModel = (DefaultListModel) orderList.getModel();
         OrderController.getInstance().resetInstance();
         UpdateOrder();
@@ -432,32 +440,24 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelOrderButtonActionPerformed
 
     private void orderListComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_orderListComponentAdded
-        // TODO add your handling code here
 
     }//GEN-LAST:event_orderListComponentAdded
 
     private void managerEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managerEditButtonActionPerformed
-        // TODO add your handling code here:
         editItemUI editUI = new editItemUI(this);
         editUI.setVisible(true);
     }//GEN-LAST:event_managerEditButtonActionPerformed
 
     private void submitOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitOrderButtonActionPerformed
-        // TODO add your handling code here:
-        couponUI coupon = new couponUI();
-        coupon.setVisible(true);
+        paymentUI pay= new paymentUI(this);
+        pay.setVisible(true);
     }//GEN-LAST:event_submitOrderButtonActionPerformed
 
+
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        // TODO add your handling code here:
         LoginUI lUI = new LoginUI(this);
         lUI.setVisible(true);
     }//GEN-LAST:event_loginButtonActionPerformed
-
-    public void addOrder(String order) {
-        this.order.addElement(order);
-        
-    }
 
 
     public static void main(String args[]) {
@@ -492,6 +492,18 @@ public class MainMenu extends javax.swing.JFrame {
         });
     }
 
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+        setWelcomeLabel("Welcome, " + customer.getName());
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setWelcomeLabel(String welcomeLabel) {
+        this.welcomeLabel.setText(welcomeLabel);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelOrderButton;

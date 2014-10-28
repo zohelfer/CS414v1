@@ -83,26 +83,26 @@ public class ProductDesc extends javax.swing.JFrame {
 
         BufferedImage itemPicture = null;
         String filepath = "";
-        if(item.getTypeString().equals(ItemType.PIZZA))
+        if(item.getType().equals(ItemType.PIZZA))
         {
-            filepath = "images/pizza-icon.png";
+            filepath = "images/pizza.png";
         }
         else if (item.getType().equals(ItemType.DRINK))
         {
             filepath = "images/soft-drinks.png";
         }
-        else
+        else if (item.getType().equals(ItemType.SPECIAL))
         {
-            filepath = "images/pizza-icon.png";
+            filepath = "images/special_offer.png";
         }
 
         try {
             itemPicture = ImageIO.read(new File(filepath));
         } catch (IOException e) {
-            System.err.println("Can not find file");
+            System.err.println("Can not find file " + filepath);
         }
         if (itemPicture != null) {
-            picture = new JLabel(new ImageIcon(itemPicture));
+            imageLabel = new JLabel(new ImageIcon(itemPicture));
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,7 +140,7 @@ public class ProductDesc extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(pizzaNameLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(imageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel3)

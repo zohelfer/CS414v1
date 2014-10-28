@@ -128,6 +128,7 @@ public class EmpLogin extends javax.swing.JFrame {
         if(usernameTextField.getText().equals("Manager") && passwordField.getText().equals("password"))
         {
             menu.ManagerMode(true);
+            menu.setWelcomeLabel("Welcome, Manager");
             this.dispose();
         }
         else if (usernameTextField.getText().equals("Chef") && passwordField.getText().equals("password"))

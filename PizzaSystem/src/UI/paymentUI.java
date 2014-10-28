@@ -5,8 +5,10 @@
  */
 package UI;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
+import Contollers.MenuItem;
+import Contollers.OrderController;
+
+import javax.swing.*;
 
 /**
  *
@@ -18,16 +20,31 @@ public class paymentUI extends javax.swing.JFrame {
 
     private boolean payWithCard = true;
     private DefaultListModel order;
-    
-    public paymentUI() {
+    private MainMenu menu;
+
+    public paymentUI(MainMenu mm) {
+        this.menu = mm;
         this.order = new DefaultListModel();
         initComponents();
-    }
-    
-    public paymentUI(DefaultListModel order) {
-        this.order = order;
-        initComponents();
-        
+        if(menu.getCustomer() != null)
+        {
+          this.nameTextField.setText(menu.getCustomer().getName());
+          this.phoneTextField.setText(menu.getCustomer().getPhone());
+          this.addressTextField.setText(menu.getCustomer().getAddress());
+          this.emailTextField.setText(menu.getCustomer().getEmail());
+        }
+        for(MenuItem m: OrderController.getInstance().getOrderItems().keySet())
+        {
+            Double Price = OrderController.getInstance().getOrderItems().get(m) * m.getPrice();
+            String orderItem = "   ";
+            orderItem += m.getName();
+            orderItem += "   ";
+            orderItem += OrderController.getInstance().getOrderItems().get(m);
+            orderItem += "   ";
+            orderItem += Price;
+            order.addElement(orderItem);
+        }
+        totalPriceLabel.setText(String.format( "$%.2f", OrderController.getInstance().getOrderTotal()));
     }
 
     /**
@@ -414,7 +431,11 @@ public class paymentUI extends javax.swing.JFrame {
         else
         {
             errorMessageLabel.setVisible(false);
+            OrderController.getInstance().submitOrder();
+            JOptionPane.showMessageDialog(null, "Success! Your order will be ready soon!");
             this.dispose();
+            menu.dispose();
+            new MainMenu().setVisible(true);
         }
             
     }//GEN-LAST:event_submitButtonActionPerformed

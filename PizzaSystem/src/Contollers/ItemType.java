@@ -6,5 +6,6 @@ package Contollers;
 public enum ItemType {
     PIZZA,
     DRINK,
-    SPECIAL;
+    SPECIAL,
+    COUPON
 }

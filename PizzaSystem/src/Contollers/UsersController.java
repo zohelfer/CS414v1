@@ -14,7 +14,7 @@ public class UsersController {
         return ourInstance;
     }
 
-    private Set<Integer> ids;
+    private HashSet<Integer> ids;
     private int maxID;
 
     private HashSet<Customer> customers;
@@ -29,8 +29,14 @@ public class UsersController {
         fileReader = new Reader();
         fileWriter = new Writer();
         customers = fileReader.readCustomer();
+        ids = new HashSet<Integer>();
         logins = fileReader.readLogin();
+        maxID = 0;
         maxID = getMaxID();
+    }
+
+    public void resetInstance(){
+        ourInstance = new UsersController();
     }
 
     private int getUniqueID(){
@@ -55,6 +61,26 @@ public class UsersController {
 
     public UsersController reloadUsersCont(){
         return new UsersController();
+    }
+
+    public Customer getCustomer(String e, String p){
+        Customer foundCus = null;
+        for(Customer c : customers){
+            if(c.getEmail().equals(e)){
+                foundCus = c;
+                break;
+            }
+        }
+        if(foundCus != null){
+            String existingPass = logins.get(e);
+            if(existingPass.equals(p)){
+                return foundCus;
+            }
+            else{
+                return null;
+            }
+        }
+        return foundCus;
     }
 
     public int getCustomerCount(){

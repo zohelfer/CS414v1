@@ -49,7 +49,7 @@ public class MenuItem {
     public boolean equals(Object o){
         if(o instanceof MenuItem){
             MenuItem newM = (MenuItem) o;
-            return this.name.equalsIgnoreCase(newM.getName());
+            return this.name.equals(newM.getName());
         }
         return false;
     }

@@ -14,7 +14,9 @@ public class couponCodeUI extends javax.swing.JFrame {
     /**
      * Creates new form couponCodeUI
      */
-    public couponCodeUI() {
+    private MainMenu menu;
+    public couponCodeUI(MainMenu mm) {
+        this.menu = mm;
         initComponents();
     }
 
@@ -106,7 +108,7 @@ public class couponCodeUI extends javax.swing.JFrame {
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         if(couponTextField.getText().equals("TEST"))
         {
-            paymentUI pay = new paymentUI();
+            paymentUI pay = new paymentUI(menu);
             pay.setVisible(true);
             this.dispose();
         }

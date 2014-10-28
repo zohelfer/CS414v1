@@ -5,11 +5,15 @@
  */
 package UI;
 
+import Contollers.UsersController;
+
 /**
  *
  * @author zacc
  */
 public class CreateAccountUI extends javax.swing.JFrame {
+
+    private UsersController uc = UsersController.getInstance();
 
     /**
      * Creates new form CreateAccountUI
@@ -190,6 +194,15 @@ public class CreateAccountUI extends javax.swing.JFrame {
 
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
         // TODO add your handling code here:
+        uc.createNewCust(
+                nameTextField.getText(),
+                phoneTextField.getText(),
+                addressTextField.getText(),
+                emailTextField.getText(),
+                passwordTextField.getText()
+                );
+        this.dispose();
+
     }//GEN-LAST:event_createButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
