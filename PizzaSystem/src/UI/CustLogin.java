@@ -130,6 +130,7 @@ public class CustLogin extends javax.swing.JFrame {
         if (cust != null)
         {
             menu.setCustomer(cust);
+            menu.ManagerMode(false);
             this.dispose();
         }
         else

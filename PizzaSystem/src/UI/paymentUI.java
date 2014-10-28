@@ -8,8 +8,7 @@ package UI;
 import Contollers.MenuItem;
 import Contollers.OrderController;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
+import javax.swing.*;
 
 /**
  *
@@ -433,7 +432,10 @@ public class paymentUI extends javax.swing.JFrame {
         {
             errorMessageLabel.setVisible(false);
             OrderController.getInstance().submitOrder();
+            JOptionPane.showMessageDialog(null, "Success! Your order will be ready soon!");
             this.dispose();
+            menu.dispose();
+            new MainMenu().setVisible(true);
         }
             
     }//GEN-LAST:event_submitButtonActionPerformed
