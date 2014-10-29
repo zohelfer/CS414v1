@@ -64,6 +64,9 @@ public class OrderController {
     public boolean completeItem(String n, double p, ItemType type) {
         MenuItem removing = new MenuItem(n, p, type);
         orderItems = getIncompleteItems();
+        if(orderItems.isEmpty()) {
+            return false;
+        }
         for(MenuItem m: orderItems.keySet()) {
             if(m.equals(removing)) {
                 int oldQ = orderItems.get(m);

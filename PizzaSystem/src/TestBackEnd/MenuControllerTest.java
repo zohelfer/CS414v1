@@ -35,15 +35,18 @@ public class MenuControllerTest {
         mc.addItem("Donuts", 4.5, ItemType.SPECIAL);
         int newSize = mc.loadMenu().size();
         assertEquals(initSize + 1, newSize);
+        mc.resetInstance();
     }
     // Add test for adding null existing item
 
     @Test
     public void testRemoveItem() throws Exception {
+        mc.addItem("Pepperoni", 3.5, ItemType.SPECIAL);
         int initSize = mc.loadMenu().size();
         mc.removeItem("Pepperoni", 3.5, ItemType.SPECIAL);
         int newSize = mc.loadMenu().size();
         assertEquals(initSize -1, newSize);
+        mc.resetInstance();
     }
 
     @Test
@@ -53,16 +56,19 @@ public class MenuControllerTest {
         mc.saveMenu();
         HashSet<MenuItem> newSet = mc.freshMenu();
         assertNotSame(initSet, newSet);
+        mc.resetInstance();
     }
 
     @Test
     public void testEditItem1() throws Exception {
         mc.addItem("Cheese", 6.7, ItemType.PIZZA);
         assertTrue(mc.editItem("Cheese", "Pepperoni", 7.0, ItemType.SPECIAL));
+        mc.resetInstance();
     }
 
     @Test
     public void testEditItem2() throws Exception {
         assertFalse(mc.editItem("Cheese", "Pepperoni", 7.0, ItemType.SPECIAL));
+        mc.resetInstance();
     }
 }

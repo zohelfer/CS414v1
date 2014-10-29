@@ -65,7 +65,9 @@ public class OrderControllerTest {
     @Test
     public void testCompleteItem2() throws Exception {
         testAdd(2);
-        assertFalse(oc.completeItem("Pizza", 6.4, ItemType.PIZZA));
+        oc.addToOrder("Soda", 5.4, ItemType.DRINK);
+        oc.submitOrder();
+        assertFalse(oc.completeItem("Yogurt", 6.4, ItemType.PIZZA));
         oc.resetInstance();
     }
 

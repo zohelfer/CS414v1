@@ -4,6 +4,7 @@ import TempPackage.Menu;
 
 import java.io.BufferedWriter;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Set;
 /**
@@ -78,6 +79,11 @@ public class MenuController {
             }
         }
         return false;
+    }
+
+    // Resets to an empty order
+    public void resetInstance(){
+        menuItems = new HashSet<MenuItem>();
     }
 
 //    public boolean createCoupon(String code, String menuItem, int discountAmount){
