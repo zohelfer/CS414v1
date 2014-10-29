@@ -71,7 +71,7 @@ public class chefUI extends javax.swing.JFrame {
         }
         initComponents();
         timer = new Timer();
-        timer.schedule(new UpdateUI(incompleteList),0,5000);
+        timer.schedule(new UpdateUI(incompleteList),0,1000);
 
     }
 
@@ -180,9 +180,10 @@ public class chefUI extends javax.swing.JFrame {
         if( removedIndex > -1){
             String sel = incompleteList.elementAt(removedIndex).toString();
             String[] token = sel.split(" ");
-            oc.completeItem(token[0], Double.parseDouble(token[1]), ItemType.valueOf(token[2]));
-            incompleteList.remove(removedIndex);
-            finishedList.addElement(sel);
+            if(oc.completeItem(token[0], Double.parseDouble(token[1]), ItemType.valueOf(token[2]))) {
+                incompleteList.remove(removedIndex);
+                finishedList.addElement(sel);
+            }
         }
     }//GEN-LAST:event_orderCompleteButtonActionPerformed
 

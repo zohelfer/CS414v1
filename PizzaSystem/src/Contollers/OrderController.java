@@ -2,6 +2,7 @@ package Contollers;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 /**
@@ -62,8 +63,8 @@ public class OrderController {
 
     public boolean completeItem(String n, double p, ItemType type) {
         MenuItem removing = new MenuItem(n, p, type);
+        orderItems = getIncompleteItems();
         for(MenuItem m: orderItems.keySet()) {
-            System.out.println("Comparing");
             if(m.equals(removing)) {
                 int oldQ = orderItems.get(m);
                 orderItems.remove(m);
@@ -71,7 +72,6 @@ public class OrderController {
                     orderItems.put(removing, oldQ - 1);
                 }
                 fileWriter.writeIncompleteOrders(orderItems);
-                System.out.println("Wrote file");
                 return true;
             }
         }
@@ -123,11 +123,15 @@ public class OrderController {
 
     public boolean submitOrder(){
         Hashtable<MenuItem, Integer> allOrders = fileReader.readIncomplete();
+        Enumeration<MenuItem> currentOrderKey = orderItems.keys();
         int i = 0;
-        for(MenuItem m1: orderItems.keySet()) {
+        while(currentOrderKey.hasMoreElements()) {
+            MenuItem m1 = currentOrderKey.nextElement();
             int quantity = orderItems.get(m1);
             if(i < allOrders.size()) {
-                for (MenuItem m2 : allOrders.keySet()) {
+                Enumeration<MenuItem> allOrdersKey = allOrders.keys();
+                while (allOrdersKey.hasMoreElements()) {
+                    MenuItem m2 = allOrdersKey.nextElement();
                     int quantity2 = allOrders.get(m2);
                     if (m1.equals(m2)) {
                         allOrders.remove(m2);
