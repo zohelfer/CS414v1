@@ -150,7 +150,5 @@ public class OrderController {
         return fileWriter.writeIncompleteOrders(allOrders);
     }
 
-    public Hashtable<MenuItem, Integer> getIncompleteItems(){
-        return fileReader.readIncomplete();
-    }
+    public Hashtable<MenuItem, Integer> getIncompleteItems(){ return fileReader.readIncomplete(); }
 }

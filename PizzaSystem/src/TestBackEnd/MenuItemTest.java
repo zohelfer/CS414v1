@@ -53,6 +53,6 @@ public class MenuItemTest {
     @Test
     public void testToString() throws Exception {
         MenuItem anItem = new MenuItem("Pizza", 6.5, ItemType.SPECIAL);
-        assertEquals("Pizza~6.5~SPECIAL", anItem.toString());
+        assertEquals("Pizza 6.5 SPECIAL", anItem.toString());
     }
 }
