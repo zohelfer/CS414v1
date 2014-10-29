@@ -17,6 +17,11 @@ public class Reader {
 		HashSet<MenuItem> m = new HashSet<MenuItem>();
 		MenuItem mi;
 		try {
+            File f = new File(FileName.MENU.name());
+            if(!f.exists()){
+                f.createNewFile();
+                return m;
+            }
 			Scanner scan = new Scanner(new File(FileName.MENU.name()));
 			while(scan.hasNextLine()) {
              String[] line = scan.nextLine().split(spaceDelimiter);
@@ -29,7 +34,7 @@ public class Reader {
             }
 			scan.close();
 		}
-		catch(FileNotFoundException e) {
+		catch(Exception e) {
             System.err.print("Could not find file\n");
         }
 		return m;

@@ -16,7 +16,11 @@ public class Writer {
 	public boolean writeMenu(HashSet<MenuItem> m) {
         boolean wroteSuccess;
 		try {
-			PrintWriter pw = new PrintWriter(new File(FileName.MENU.name()));
+            File f = new File(FileName.MENU.name());
+            if(!f.exists()){
+                f.createNewFile();
+            }
+			PrintWriter pw = new PrintWriter(f);
 			for(MenuItem item : m) {
 				pw.println(item.getName() +
                         splitDelimiter +
@@ -27,7 +31,7 @@ public class Writer {
 			pw.close();
             wroteSuccess = true;
 		}
-		catch(FileNotFoundException e) { wroteSuccess = false; }
+		catch(Exception e) { wroteSuccess = false; }
         return wroteSuccess;
 	}
 
