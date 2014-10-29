@@ -21,6 +21,7 @@ public class Reader {
             if(!f.exists()){
                 f.createNewFile();
                 return m;
+
             }
 			Scanner scan = new Scanner(new File(FileName.MENU.name()));
 			while(scan.hasNextLine()) {
