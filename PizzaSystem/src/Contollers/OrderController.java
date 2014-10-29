@@ -118,11 +118,15 @@ public class OrderController {
 
     public boolean submitOrder(){
         Hashtable<MenuItem, Integer> allOrders = fileReader.readIncomplete();
+        Enumeration<MenuItem> currentOrderKey = orderItems.keys();
         int i = 0;
-        for(MenuItem m1: orderItems.keySet()) {
+        while(currentOrderKey.hasMoreElements()) {
+            MenuItem m1 = currentOrderKey.nextElement();
             int quantity = orderItems.get(m1);
             if(i < allOrders.size()) {
-                for (MenuItem m2 : allOrders.keySet()) {
+                Enumeration<MenuItem> allOrdersKey = allOrders.keys();
+                while (allOrdersKey.hasMoreElements()) {
+                    MenuItem m2 = allOrdersKey.nextElement();
                     int quantity2 = allOrders.get(m2);
                     if (m1.equals(m2)) {
                         allOrders.remove(m2);
@@ -139,7 +143,6 @@ public class OrderController {
         orderItems = new Hashtable<MenuItem, Integer>();
 
         return fileWriter.writeIncompleteOrders(allOrders);
-        //return fileWriter.writeIncompleteOrders(orderItems);
     }
 
     public Hashtable<MenuItem, Integer> getIncompleteItems(){
